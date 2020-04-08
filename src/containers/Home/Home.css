@@ -1,0 +1,25 @@
+.Home {
+    /* background-color: antiquewhite; */
+    padding-top: 60px;
+}
+
+/* TODO add search icon to the text box with font awesome */
+.Home input[type=text] {
+    width: 30%;
+    height: 50px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    /* background-image: url('searchicon.png'); */
+    /* background-position: 10px 10px;  */
+    /* background-repeat: no-repeat; */
+    padding: 12px 20px 12px 40px;
+    /* -webkit-transition: width 0.4s ease-in-out; */
+    transition: width 0.4s ease-in-out; 
+  }
+  
+  .Home input[type=text]:focus {
+    width: 60%;
+  }
