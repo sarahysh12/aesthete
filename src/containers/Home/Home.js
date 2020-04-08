@@ -50,25 +50,34 @@ class Home extends Component {
 
         const artists = this.state.aesthetes.map(artist => {
             return (
-                <Aesthete name={artist.aesthete_full_name}/>
+                <Aesthete 
+                name={artist.aesthete_full_name}
+                speciality={artist.category}
+                rating={artist.rating}/>
             );
         });
 
+        //TODO show the full size search bar in mobile view
         return (
             <div>
-                 <div className="Home"> 
-                <input placeholder="Search for Aesthetes Or artworks" type="text" name="search"/>
-                {/* <button>
-                    <NavLink to="/artworks">
-                        Arts
-                    </NavLink>
-                </button> */}
-                </div>
-                <h1>ArtWorks</h1>
-                {arts}
-                <h1>Aesthetes</h1>
-                {artists}
+                <div className="Home"> 
+                    <input placeholder="Search for Aesthetes Or artworks" type="text" name="search"/>
+                    {/* <button>
+                        <NavLink to="/artworks">
+                            Arts
+                        </NavLink>
+                    </button> */}
+                    <h1>ArtWorks</h1>
+                    <section className="Artworks">
+                        {arts}
+                    </section>
+                    <hr/>
+                    <h1>Aesthetes</h1> 
+                    <section className="Aesthetes">
+                        {artists}
+                    </section>
 
+                </div>
                 {/* <Route path="/artworks" component={Artworks} /> */}
             </div>
         )

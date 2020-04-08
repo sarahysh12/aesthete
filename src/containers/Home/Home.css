@@ -1,6 +1,7 @@
 .Home {
     /* background-color: antiquewhite; */
     padding-top: 60px;
+    color: #4d4a49;
 }
 
 /* TODO add search icon to the text box with font awesome */
@@ -22,4 +23,34 @@
   
   .Home input[type=text]:focus {
     width: 60%;
+  }
+
+.Home hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.Home h1 {
+  padding-top: 30px;
+  color: #635e5d;
+}
+
+
+  .Artworks {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;   /* move items to the next row when the items more that 5, it makes the UI resonsive */
+    margin: auto;
+  }
+/* 
+  .Artworks h1 {
+    margin: 100px;
+  } */
+
+  .Aesthetes {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;   /* move items to the next row when the items more that 5, it makes the UI resonsive */
+    margin: auto;
   }
