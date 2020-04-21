@@ -6,7 +6,7 @@ const aesthete = (props) => (
         <h3>{props.name}</h3>
         <p>Speciality: {props.speciality}</p>
         <p>{props.rating} Star</p>
-        <button>Chit Chat</button>
+        <button onClick={props.aestheteClicked}>Chit Chat</button>
     </article>
 );
 
