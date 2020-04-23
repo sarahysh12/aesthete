@@ -8,13 +8,15 @@ import {Provider} from 'react-redux';
 import { createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import authReducer from './store/reducers/auth';
 import artworkReducer from './store/reducers/artwork';
+import aestheteReducer from './store/reducers/aesthete';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    artwork: artworkReducer
+    artwork: artworkReducer,
+    aesthete: aestheteReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(
@@ -22,7 +24,7 @@ const store = createStore(rootReducer, composeEnhancers(
 ))
 
 const app = (
-    <Provider>
+    <Provider store={store}>
         <BrowserRouter>
             <App/>
         </BrowserRouter>

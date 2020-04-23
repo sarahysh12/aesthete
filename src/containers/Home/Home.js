@@ -3,41 +3,31 @@ import './Home.css';
 import axios from '../../axios';
 import Artwork from '../../components/Artwork/Artwork';
 import Aesthete from '../../components/Aesthete/Aesthete';
-// import {Route, NavLink} from 'react-router-dom';
 import Search from '../../components/Search/Search';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
-//TODO it loads the page twice, maybe we need unmount
 class Home extends Component {
 
 
-    state = {
-        artworks : [],
-        aesthetes: [],
-        filteredArtworks: [],
-        filteredAesthetes: [],
-        isCraved: true
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            aesthetes: [],
+            filteredArtworks: props.arts,
+            filteredAesthetes: props.artists,
+            isCraved: true,
+            renderCount : 0
+        }
     }
 
     componentDidMount(){
         // Get Services
-        axios.get('/artworks.json')
-            .then(response => {
-                this.setState({artworks: response.data})
-                this.setState({filteredArtworks: response.data})
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        this.props.onFetchArtworks()
 
         // Get Users in specific category
-        axios.get('/aesthetes.json')
-        .then(response => {
-            this.setState({aesthetes: response.data})
-            this.setState({filteredAesthetes: response.data})
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        this.props.onFetchArtists()
     }
 
     onSearchHandler = (evt) => {
@@ -45,7 +35,7 @@ class Home extends Component {
         const keyword = evt.target.value;
         var regex = new RegExp(keyword);
         let artworkSearchResult = [];
-        this.state.artworks.some(artwork => {
+        this.props.arts.some(artwork => {
             if(artwork.artwork_type.toLowerCase().match(regex)){
                 artworkSearchResult.push(artwork)
             }
@@ -54,7 +44,7 @@ class Home extends Component {
 
         // On Aesthetes
         let aestheteSearchResult = [];
-        this.state.aesthetes.some(aesthete => {
+        this.props.artists.some(aesthete => {
             for (let cat of aesthete.category){
                 if(cat.toLowerCase().match(regex)){
                     if(aestheteSearchResult.find(item => item.aesthete_full_name === aesthete.aesthete_full_name)){
@@ -69,7 +59,6 @@ class Home extends Component {
     }
 
     onCraveClickedHandler (art_id) {
-        console.log(art_id, 'crave clicked')
         this.setState({isCraved: !this.state.isCraved})
         if (this.state.isCraved) {
             // Send request to the aesthete he/she has 
@@ -85,7 +74,16 @@ class Home extends Component {
 
     // isCraved change all button names
     render() {
-        const arts = this.state.filteredArtworks.map(art => {
+        let arts = null;
+        let artSource = this.props.arts;
+
+        if(this.state.filteredArtworks.length > 0) {
+            artSource = this.state.filteredArtworks
+        }
+        else {
+            artSource = this.props.arts
+        }
+        arts = artSource.map(art => {
             return (
                 <Artwork 
                     key = {art.id}
@@ -100,9 +98,18 @@ class Home extends Component {
             );
         });
 
-        const artists = this.state.filteredAesthetes.map(artist => {
+        let artists = null;
+        let artistSource = this.props.artists;
+        if(this.state.filteredArtworks.length > 0) {
+            artistSource = this.state.filteredAesthetes
+        }
+        else {
+            artistSource = this.props.artists
+        }
+        artists = artistSource.map(artist => {
             return (
                 <Aesthete 
+                    key = {artist.aesthete_full_name}
                     name={artist.aesthete_full_name}
                     speciality={artist.category}
                     rating={artist.rating}
@@ -132,5 +139,21 @@ class Home extends Component {
     }
 }
 
-export default Home;
+
+const mapStateToProps = state => {
+    return {
+        arts: state.artwork.artworks,
+        artists: state.aesthete.aesthetes
+    };
+};
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchArtworks: () => dispatch(actions.fetchArtworks()),
+        onFetchArtists: () => dispatch(actions.fetchAesthetes())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home, axios);
 
