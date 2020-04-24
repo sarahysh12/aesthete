@@ -5,4 +5,10 @@ from './artwork';
 export {
     fetchAesthetes
 }
-from './aesthete'
+from './aesthete';
+export {
+    checkAuthTimeout,
+    auth,
+    authCheckState,
+    setAuthRedirectPath
+} from './auth';
