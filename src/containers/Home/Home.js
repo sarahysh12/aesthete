@@ -61,9 +61,12 @@ class Home extends Component {
 
     //TODO add id for user
     onAestheteClickedHandler (username) {
-        console.log(username, 'aesthete clicked');
-        console.log(this.props.history)
-        this.props.history.push('/aesthete');
+        if(this.props.isAuthenticated) {
+            this.props.history.push('/aesthete');
+        } else {
+            this.props.onSetAuthRedirectPath('/aesthete');
+            this.props.history.push('/auth')
+        }
     }
 
     // TODO isCraved change all button names
@@ -116,6 +119,7 @@ class Home extends Component {
             <div>
                 <div className="Home">
                     <Search changed={this.onSearchHandler}/>
+                    <h1>Authentication: {this.props.isAuthenticated}</h1>
                     <h1>ArtWorks</h1>
                     <section className="Artworks">
                         {arts}
@@ -135,7 +139,8 @@ class Home extends Component {
 const mapStateToProps = state => {
     return {
         arts: state.artwork.artworks,
-        artists: state.aesthete.aesthetes
+        artists: state.aesthete.aesthetes,
+        isAuthenticated: state.auth.token !== null
     };
 };
 
@@ -143,7 +148,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchArtworks: () => dispatch(actions.fetchArtworks()),
-        onFetchArtists: () => dispatch(actions.fetchAesthetes())
+        onFetchArtists: () => dispatch(actions.fetchAesthetes()),
+        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
     };
 };
 

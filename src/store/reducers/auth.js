@@ -7,7 +7,7 @@ const initialState = {
     userId: null,
     error: null,
     loading: false,
-    authRedirectingPath: '/'
+    authRedirectPath: '/'
 };
 
 
@@ -39,7 +39,7 @@ const authLogout = (state, action) => {
 };
 
 const setAuthRedirectPath = (state, action) => {
-    return updateObject(state, {setAuthRedirectPath: action.path})
+    return updateObject(state, {authRedirectPath: action.path})
 }
 
 const reducer = (state=initialState, action) => {

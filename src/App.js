@@ -21,7 +21,6 @@ class App extends Component {
     );
 
     if(this.props.isAuthenticated){
-      console.log('Authenticated')
       routes = (
         <Switch>
           <Route path='/aesthete' component={Profile}/>
