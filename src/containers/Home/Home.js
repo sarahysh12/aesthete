@@ -8,11 +8,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 class Home extends Component {
-
-
     constructor(props) {
         super(props);
-    
         this.state = {
             aesthetes: [],
             filteredArtworks: props.arts,
@@ -22,16 +19,12 @@ class Home extends Component {
         }
     }
 
-    componentDidMount(){
-        // Get Services
+    componentDidMount() {
         this.props.onFetchArtworks()
-
-        // Get Users in specific category
         this.props.onFetchArtists()
     }
 
     onSearchHandler = (evt) => {
-        // On Artworks
         const keyword = evt.target.value;
         var regex = new RegExp(keyword);
         let artworkSearchResult = [];
@@ -42,7 +35,6 @@ class Home extends Component {
         });
         this.setState({filteredArtworks: artworkSearchResult})
 
-        // On Aesthetes
         let aestheteSearchResult = [];
         this.props.artists.some(aesthete => {
             for (let cat of aesthete.category){
@@ -69,10 +61,12 @@ class Home extends Component {
 
     //TODO add id for user
     onAestheteClickedHandler (username) {
-        console.log(username, 'aesthete clicked')
+        console.log(username, 'aesthete clicked');
+        console.log(this.props.history)
+        this.props.history.push('/aesthete');
     }
 
-    // isCraved change all button names
+    // TODO isCraved change all button names
     render() {
         let arts = null;
         let artSource = this.props.arts;
@@ -120,7 +114,7 @@ class Home extends Component {
         //TODO show the full size search bar in mobile view
         return (
             <div>
-                <div className="Home"> 
+                <div className="Home">
                     <Search changed={this.onSearchHandler}/>
                     <h1>ArtWorks</h1>
                     <section className="Artworks">
@@ -131,9 +125,7 @@ class Home extends Component {
                     <section className="Aesthetes">
                         {artists}
                     </section>
-
                 </div>
-                {/* <Route path="/artworks" component={Artworks} /> */}
             </div>
         )
     }
