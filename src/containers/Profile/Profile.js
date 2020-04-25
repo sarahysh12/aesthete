@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import './Profile.css'
+import classes from './Profile.css'
 
 
 class Profile extends Component {
@@ -7,7 +7,7 @@ class Profile extends Component {
 
     render() {
         return (
-            <div className="Profile">
+            <div className={classes.Profile}>
                 <h1>Sara Yarshenas</h1>
             </div>
         );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Home.css';
+import classes from './Home.css';
 import axios from '../../axios';
 import Artwork from '../../components/Artwork/Artwork';
 import Aesthete from '../../components/Aesthete/Aesthete';
@@ -117,16 +117,15 @@ class Home extends Component {
         //TODO show the full size search bar in mobile view
         return (
             <div>
-                <div className="Home">
+                <div className={classes.Home}>
                     <Search changed={this.onSearchHandler}/>
-                    <h1>Authentication: {this.props.isAuthenticated}</h1>
                     <h1>ArtWorks</h1>
-                    <section className="Artworks">
+                    <section className={classes.Artworks}>
                         {arts}
                     </section>
                     <hr/>
                     <h1>Aesthetes</h1> 
-                    <section className="Aesthetes">
+                    <section className={classes.Aesthetes}>
                         {artists}
                     </section>
                 </div>

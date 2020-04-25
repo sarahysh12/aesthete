@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import logo from './images/aesthete.png';
-import './App.css';
+import classes from './App.css';
 import { Switch } from 'react-router-dom';
 import Home from './containers/Home/Home';
 import { withRouter, Route, Redirect } from 'react-router-dom';
@@ -32,10 +31,7 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
-          {/* <header className="App-header">
-            <img src={logo} alt="logo" />
-          </header> */}
+      <div className={classes.App}>
           <Layout>
             {routes}
           </Layout>

@@ -1,41 +1,42 @@
 import React from 'react';
+
 import classes from './Input.css';
 
-const input = (props) => {
-
+const input = ( props ) => {
     let inputElement = null;
-    const inputClasses = [classes.inputElement];
-    if(props.invalid && props.shouldValidate && props.tuched) {
-        inputClasses.push(classes.invalid);
+    const inputClasses = [classes.InputElement];
+
+    if (props.invalid && props.shouldValidate && props.touched) {
+        inputClasses.push(classes.Invalid);
     }
 
-    switch(props.elementType) {
-        case('input'):
+    switch ( props.elementType ) {
+        case ( 'input' ):
             inputElement = <input
-            className={inputClasses.join(' ')}
-            {...props.elementConfig}
-            value={props.value}
-            onChange={props.changed}/>;
-            break;
-        case('textarea'):
-            <textarea
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
-                onChange={props.changed}/>;
+                onChange={props.changed} />;
             break;
-        case('select'):
+        case ( 'textarea' ):
+            inputElement = <textarea
+                className={inputClasses.join(' ')}
+                {...props.elementConfig}
+                value={props.value}
+                onChange={props.changed} />;
+            break;
+        case ( 'select' ):
             inputElement = (
                 <select
                     className={inputClasses.join(' ')}
                     value={props.value}
-                    onChanged={props.changed}>
-                        {props.elementConfig.options.map(option => (
-                            <option key={option.value} value={option.value}>
-                                {option.displayValue}
-                            </option>
-                        ))}
-                    </select>
+                    onChange={props.changed}>
+                    {props.elementConfig.options.map(option => (
+                        <option key={option.value} value={option.value}>
+                            {option.displayValue}
+                        </option>
+                    ))}
+                </select>
             );
             break;
         default:
@@ -43,10 +44,8 @@ const input = (props) => {
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
                 value={props.value}
-                onChange={props.changed}/>;
+                onChange={props.changed} />;
     }
-
-
 
     return (
         <div className={classes.Input}>

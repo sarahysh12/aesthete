@@ -15,6 +15,7 @@
     padding: 12px 20px 12px 40px;
     /* -webkit-transition: width 0.4s ease-in-out; */
     transition: width 0.4s ease-in-out; 
+    outline: none;
   }
   
   .Search input[type=text]:focus {

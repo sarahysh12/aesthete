@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as actions from '../../store/actions/index';
-import './Auth.css';
+import classes from './Auth.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import { Redirect } from 'react-router-dom';
@@ -138,17 +138,16 @@ class Auth extends Component {
 
 
         return (
-            <div className="Auth">
+            <div className={classes.Auth}>
                 <h1>Welcome to Aesthete</h1>
                 {authRedirect}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {form}
-                    <Button btnType="Success">SUBMIT</Button>
+                    <Button>SUBMIT</Button>
                 </form>
-                <Button
-                clicked={this.switchAuthModeHandler}
-                btnType="Danger">SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</Button>
+                <p style={{cursor: 'pointer'}} clicked={this.switchAuthModeHandler}>
+                    SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</p>
             </div>
         );
     }

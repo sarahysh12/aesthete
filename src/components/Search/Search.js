@@ -1,8 +1,8 @@
 import React from 'react';
-import './Search.css';
+import classes from './Search.css';
 
 const search = (prpos) => (
-    <div className="Search">
+    <div className={classes.Search}>
         <input placeholder="Search for Aesthetes Or artworks" type="text" name="search" onChange={prpos.changed}/>
     </div>
 );

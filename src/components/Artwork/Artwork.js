@@ -1,8 +1,8 @@
 import React from 'react';
-import './Artwork.css';
+import classes from './Artwork.css';
 
 const artwork = (props) => (
-    <article className="Artwork">
+    <article className={classes.Artwork}>
         <h3>{props.title}</h3>
         <p>{props.description}</p>
         <p>{props.category}</p>
