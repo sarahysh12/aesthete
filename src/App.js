@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './aesthete.png';
+// import logo from './images/aesthete.png';
 import './App.css';
 import { Switch } from 'react-router-dom';
 import Home from './containers/Home/Home';
@@ -8,6 +8,7 @@ import Profile from './containers/Profile/Profile';
 import Auth from './containers/Auth/Auth';
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index';
+import Layout from './hoc/Layout/Layout';
 
 class App extends Component {
   
@@ -24,6 +25,7 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path='/aesthete' component={Profile}/>
+          <Route path="/" exact component={Home}/>
           <Redirect to="/" />
         </Switch>
       );
@@ -31,11 +33,12 @@ class App extends Component {
 
     return (
       <div className="App">
-          <header className="App-header">
+          {/* <header className="App-header">
             <img src={logo} alt="logo" />
-          </header>
-          {routes}
-          {/* TODO add a layeout component (hoc) */}
+          </header> */}
+          <Layout>
+            {routes}
+          </Layout>
         </div>
 
     );
