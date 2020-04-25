@@ -7,32 +7,24 @@
     cursor: pointer;
     text-align: left;
     margin: 20px;
-    background-image: url('../../images/default-user-pic.png');
     background-size: contain;
     background-position: 200px 10px; 
     background-repeat: no-repeat;
 }
 
 .Aesthete button {
-	box-shadow: 0px 1px 0px 0px #ffffff;
-	background:linear-gradient(to bottom, #7c529e 5%, #ae63eb 100%);
-	background-color:#7c529e;
-	border-radius:6px;
-	border:1px solid #c3c2c4;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #9750d1;
+	background:#FFBB99;
+	border: 1px solid white;
+	border-radius: 1000px;
+	padding: 8px 25px;
+	color:white;
+	display: inline-block;
+	text-align: center;
 	outline: none;
 }
 .Aesthete button:hover {
-	background:linear-gradient(to bottom, #ae63eb 5%, #7c529e 100%);
-	background-color:#ae63eb;
+	background-color:#FFFF8A;
+	color: #919090;
 }
 .Aesthete button:active {
 	position:relative;

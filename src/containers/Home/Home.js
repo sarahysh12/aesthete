@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Home.css';
+import classes from './Home.css';
 import axios from '../../axios';
 import Artwork from '../../components/Artwork/Artwork';
 import Aesthete from '../../components/Aesthete/Aesthete';
@@ -61,9 +61,12 @@ class Home extends Component {
 
     //TODO add id for user
     onAestheteClickedHandler (username) {
-        console.log(username, 'aesthete clicked');
-        console.log(this.props.history)
-        this.props.history.push('/aesthete');
+        if(this.props.isAuthenticated) {
+            this.props.history.push('/aesthete');
+        } else {
+            this.props.onSetAuthRedirectPath('/aesthete');
+            this.props.history.push('/auth')
+        }
     }
 
     // TODO isCraved change all button names
@@ -114,15 +117,15 @@ class Home extends Component {
         //TODO show the full size search bar in mobile view
         return (
             <div>
-                <div className="Home">
+                <div className={classes.Home}>
                     <Search changed={this.onSearchHandler}/>
                     <h1>ArtWorks</h1>
-                    <section className="Artworks">
+                    <section className={classes.Artworks}>
                         {arts}
                     </section>
                     <hr/>
                     <h1>Aesthetes</h1> 
-                    <section className="Aesthetes">
+                    <section className={classes.Aesthetes}>
                         {artists}
                     </section>
                 </div>
@@ -135,7 +138,8 @@ class Home extends Component {
 const mapStateToProps = state => {
     return {
         arts: state.artwork.artworks,
-        artists: state.aesthete.aesthetes
+        artists: state.aesthete.aesthetes,
+        isAuthenticated: state.auth.token !== null
     };
 };
 
@@ -143,7 +147,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchArtworks: () => dispatch(actions.fetchArtworks()),
-        onFetchArtists: () => dispatch(actions.fetchAesthetes())
+        onFetchArtists: () => dispatch(actions.fetchAesthetes()),
+        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
     };
 };
 

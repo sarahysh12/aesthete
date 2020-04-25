@@ -1,8 +1,8 @@
 import React from 'react';
-import './Aesthete.css';
+import classes from './Aesthete.css';
 
 const aesthete = (props) => (
-    <article className="Aesthete">
+    <article className={classes.Aesthete}>
         <h3>{props.name}</h3>
         <p>Speciality: {props.speciality}</p>
         <p>{props.rating} Star</p>
