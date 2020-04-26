@@ -20,7 +20,7 @@ class Layout extends Component {
         return (
             <Aux>
                 <Toolbar
-                    isAth={this.props.isAuthenticated} />
+                    isAuth={this.props.isAuthenticated} />
                     {/* // drawerToggleClicked={this.sideDrawerToggleHandler} /> */}
                     <main className={classes.Content}>
                         {this.props.children}
@@ -37,4 +37,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect (mapStateToProps)(Layout);
+export default connect(mapStateToProps)(Layout);

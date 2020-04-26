@@ -145,9 +145,9 @@ class Auth extends Component {
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <Button>SUBMIT</Button>
-                    <button style={{border: 'none', outline: 'none', marginTop: '20px'}} onClick={this.switchAuthModeHandler}>
-                    SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</button>
                 </form>
+                <button style={{border: 'none', outline: 'none', marginTop: '20px'}} onClick={this.switchAuthModeHandler}>
+                SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</button>
                
             </div>
         );

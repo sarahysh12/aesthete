@@ -66,7 +66,7 @@ class Home extends Component {
         } else {
             this.props.onSetAuthRedirectPath('/aesthete');
             this.props.history.push('/auth')
-        }
+        }        
     }
 
     // TODO isCraved change all button names
