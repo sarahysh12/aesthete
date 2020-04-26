@@ -7,8 +7,8 @@ export {
 }
 from './aesthete';
 export {
-    checkAuthTimeout,
     auth,
-    authCheckState,
-    setAuthRedirectPath
+    logout,
+    setAuthRedirectPath,
+    authCheckState
 } from './auth';
