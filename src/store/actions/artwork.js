@@ -1,7 +1,7 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios';
 
-
+// Fetch all Artworks
 export const fetchArtworkStart = () => {
     return {
         type: actionTypes.FETCH_ARTWORKS_START
@@ -15,14 +15,12 @@ export const fetchArtworkSuccess= (artworks) => {
     }
 };
 
-
 export const fetchArtworkFail = (error) => {
     return {
         type: actionTypes.FETCH_ARTWORKS_FAIL,
         error: error
     }
 };
-
 
 export const fetchArtworks = () => {
     return dispatch => {
@@ -44,8 +42,7 @@ export const fetchArtworks = () => {
     }
 }
 
-
-
+// Add new Artwork
 export const addArtworkStart = () => {
     return {
         type: actionTypes.ADD_ARTWORK_START
@@ -67,6 +64,7 @@ export const addArtworkFailed = (error) => {
     }
 }
 
+//TODO how to use token?
 export const addArtwork = (artworkData, token) => {
     return dispatch => {
         dispatch(addArtworkStart())
@@ -77,5 +75,28 @@ export const addArtwork = (artworkData, token) => {
             .catch(error => {
                 dispatch(addArtworkFailed(error))
             })
+    }
+}
+
+
+// Fetch Artworks by userId
+export const fetchArtworksByUserId = (token, userId) => {
+    return dispatch => {
+        dispatch(fetchArtworkStart())
+        const queryParams = '?orderBy="userId"&equalTo="'+userId+'"';
+        axios.get('/artworks.json'+queryParams)
+            .then(response => {
+                const fetchedArtworks = [];
+                for(let key in response.data) {
+                    fetchedArtworks.push({
+                        ...response.data[key],
+                        id: key
+                    });
+                }
+                dispatch(fetchArtworkSuccess(fetchedArtworks))
+            })
+            .catch(error => {
+                dispatch(fetchArtworkFail(error))
+            });
     }
 }

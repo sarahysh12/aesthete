@@ -4,6 +4,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
+import Artwork from '../../components/Artwork/Artwork';
 
 
 class Profile extends Component {
@@ -66,6 +67,10 @@ class Profile extends Component {
             }
         },
         formIsValid: false
+    } 
+
+    componentDidMount() {
+        this.props.onFetchArtworkById(this.props.token, this.props.userId)
     }
 
     checkValidity(value, rules) {
@@ -134,6 +139,29 @@ class Profile extends Component {
     }
 
     render() {
+        // Display arworks
+        let arts = <p>Artworks will load here</p>;
+        console.log(this.props.artworks)
+        if ( !this.props.loading ) {
+            arts = this.props.artworks.map(art => {
+                return (
+                    <Artwork 
+                        key = {art.id}
+                        title={art.artworkData.artwork_title}
+                        category={art.artworkData.artwork_type}
+                        description={art.artworkData.artwork_description}
+                        artist={art.userId}
+                        price={art.artworkData.price}
+                        rating={art.artworkData.rating}
+                        date={art.created_date}
+                        craveClicked={() => this.onCraveClickedHandler(art.id)}
+                        isCraveSelected={this.state.isCraved}/>
+                );
+            });
+        }
+
+        // TODO Clear the for after submission and display a message
+
         const formElementArray = [];
         for(let key in this.state.artworkForm) {
             formElementArray.push({
@@ -161,8 +189,10 @@ class Profile extends Component {
         return (
             <div className={classes.Profile}>
                 <h1>Aesthete Name</h1>
-                <p>Select a category</p>
-                <h1>Services (select Services by category and userId)</h1>
+                <h3>Select a category + Services (select Services by category and userId)</h3>
+                <div className={classes.Artworks}>
+                        {arts}
+                </div>
                 <div className={classes.AddService}>
                     {form}
                 </div>
@@ -174,14 +204,18 @@ class Profile extends Component {
 const mapStateToProps = state => {
     return {
         userId : state.auth.userId,
-        token: state.auth.token
+        token: state.auth.token,
+        artworks: state.artwork.artworks,
+        loading: state.artwork.loading
     };
 };
 
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddArtwork: (artworkData, token) => dispatch(actions.addArtwork(artworkData, token))
+        onAddArtwork: (artworkData, token) => dispatch(actions.addArtwork(artworkData, token)),
+        onFetchArtworkById: (token, userId) => dispatch(actions.fetchArtworksByUserId(token, userId))
+
     };
 };
 

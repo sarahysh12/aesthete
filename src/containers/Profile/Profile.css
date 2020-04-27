@@ -8,3 +8,10 @@
     margin: auto;
     padding: 30px;
 }
+
+.Artworks {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;   /* move items to the next row when the items more that 5, it makes the UI resonsive */
+    margin: auto;
+}

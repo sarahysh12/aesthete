@@ -1,6 +1,7 @@
 export {
     fetchArtworks,
-    addArtwork
+    addArtwork,
+    fetchArtworksByUserId
 }
 from './artwork';
 export {
