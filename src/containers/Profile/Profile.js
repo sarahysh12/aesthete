@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import classes from './Profile.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import * as actions from '../../store/actions/index';
+import { connect } from 'react-redux';
 
 
 class Profile extends Component {
     state = {
         artworkForm : {
-            name: {
+            artwork_title: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
@@ -20,7 +22,7 @@ class Profile extends Component {
                 valid: false,
                 touched: false
             },
-            description: {
+            artwork_description: {
                 elementType: 'textarea',
                 elementConfig: {
                     type: 'text',
@@ -33,7 +35,7 @@ class Profile extends Component {
                 valid: false,
                 touched: false
             },
-            arttype: {
+            artwork_type: {
                 elementType: 'select',
                 elementConfig: {
                     options: [
@@ -65,7 +67,6 @@ class Profile extends Component {
         },
         formIsValid: false
     }
-
 
     checkValidity(value, rules) {
         let isValid = true;
@@ -99,10 +100,37 @@ class Profile extends Component {
     }
 
     inputChangeHandler =(event, inputIdentifier) => {
+        const updatedArtworkForm = {
+            ...this.state.artworkForm
+        };
+        const updatedFormElement = { 
+            ...updatedArtworkForm[inputIdentifier]
+        };
+        updatedFormElement.value = event.target.value;
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
+        updatedArtworkForm[inputIdentifier] = updatedFormElement;
 
+        let formIsValid = true;
+        for (let inputIdentifier in updatedArtworkForm) {
+            formIsValid = updatedArtworkForm[inputIdentifier].valid && formIsValid;
+        }
+        this.setState({artworkForm: updatedArtworkForm, formIsValid: formIsValid});
     }
 
-    artworkHandler () {
+    onAddArtworkHandler = (event) => {
+        event.preventDefault();
+        const formData = {};
+        for(let formElementIdentifier in this.state.artworkForm) {
+            formData[formElementIdentifier] = this.state.artworkForm[formElementIdentifier].value;
+        }
+        const artwork = {
+            artworkData: formData,
+            userId: this.props.userId,
+            rating: 0,
+            created_date: new Date()
+        }
+        this.props.onAddArtwork(artwork, this.props.token);
     }
 
     render() {
@@ -114,7 +142,7 @@ class Profile extends Component {
             });
         }
         let form = (
-            <form onSubmit={this.artworkHandler}>
+            <form onSubmit={this.onAddArtworkHandler}>
                 {formElementArray.map(formElement => (
                     <Input
                         key={formElement.id}
@@ -136,13 +164,27 @@ class Profile extends Component {
                 <p>Select a category</p>
                 <h1>Services (select Services by category and userId)</h1>
                 <div className={classes.AddService}>
-                    <p>Add New Service with userId</p>
                     {form}
                 </div>
-
             </div>
         );
     }
 }
 
-export default Profile;
+const mapStateToProps = state => {
+    return {
+        userId : state.auth.userId,
+        token: state.auth.token
+    };
+};
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAddArtwork: (artworkData, token) => dispatch(actions.addArtwork(artworkData, token))
+    };
+};
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

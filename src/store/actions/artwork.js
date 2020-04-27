@@ -29,10 +29,53 @@ export const fetchArtworks = () => {
         dispatch(fetchArtworkStart())
         axios.get('/artworks.json')
             .then(response => {
-                dispatch(fetchArtworkSuccess(response.data))
+                const fetchedArtworks = [];
+                for(let key in response.data) {
+                    fetchedArtworks.push({
+                        ...response.data[key],
+                        id: key
+                    });
+                }
+                dispatch(fetchArtworkSuccess(fetchedArtworks))
             })
             .catch(error => {
                 dispatch(fetchArtworkFail(error))
             });
+    }
+}
+
+
+
+export const addArtworkStart = () => {
+    return {
+        type: actionTypes.ADD_ARTWORK_START
+    }
+}
+
+export const addArtworkSuccess = (id, artworkData) => {
+    return {
+        type: actionTypes.ADD_ARTWORK_SUCCESS,
+        artworkId: id,
+        artworkData: artworkData
+    }
+}
+
+export const addArtworkFailed = (error) => {
+    return {
+        type: actionTypes.ADD_ARTWORK_FAILED,
+        error: error
+    }
+}
+
+export const addArtwork = (artworkData, token) => {
+    return dispatch => {
+        dispatch(addArtworkStart())
+        axios.post('/artworks.json', artworkData)
+            .then(response => {
+                dispatch(addArtworkSuccess(response.data.name, artworkData))
+            })
+            .catch(error => {
+                dispatch(addArtworkFailed(error))
+            })
     }
 }

@@ -61,13 +61,12 @@ class Home extends Component {
 
     //TODO add id for user
     onAestheteClickedHandler (username) {
-        this.props.history.push('/aesthete');
-        // if(this.props.isAuthenticated) {
-        //     this.props.history.push('/aesthete');
-        // } else {
-        //     this.props.onSetAuthRedirectPath('/aesthete');
-        //     this.props.history.push('/auth');
-        // }        
+        if(this.props.isAuthenticated) {
+            this.props.history.push('/aesthete');
+        } else {
+            this.props.onSetAuthRedirectPath('/aesthete');
+            this.props.history.push('/auth');
+        }        
     }
 
     // TODO isCraved change all button names
@@ -81,17 +80,20 @@ class Home extends Component {
         else {
             artSource = this.props.arts
         }
+        //TODO make this dynamic for names
+        //TODO convert userId to name
         arts = artSource.map(art => {
             return (
                 <Artwork 
                     key = {art.id}
-                    title={art.artwork_title}
-                    category={art.artwork_type}
-                    description={art.description}
-                    artist={art.artist}
-                    price={art.price}
-                    rating={art.rating}
-                    craveClicked={() => this.onCraveClickedHandler(art.artwork_id)}
+                    title={art.artworkData.artwork_title}
+                    category={art.artworkData.artwork_type}
+                    description={art.artworkData.artwork_description}
+                    artist={art.userId}
+                    price={art.artworkData.price}
+                    rating={art.artworkData.rating}
+                    date={art.created_date}
+                    craveClicked={() => this.onCraveClickedHandler(art.id)}
                     isCraveSelected={this.state.isCraved}/>
             );
         });

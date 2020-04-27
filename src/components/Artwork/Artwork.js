@@ -9,7 +9,7 @@ const artwork = (props) => (
         <p>{props.rating} Star</p>
         <p>{props.price} $/hr</p>
         <p><b>{props.artist}</b></p>
-        <p>2020/02/20</p>
+        <p>{Date(props.date)}</p>
         <button onClick={props.craveClicked}>{props.isCraveSelected ? 'Crave' : 'Uncrave'}</button>
     </article>
 );

@@ -1,5 +1,6 @@
 export {
-    fetchArtworks
+    fetchArtworks,
+    addArtwork
 }
 from './artwork';
 export {
