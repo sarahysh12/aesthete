@@ -61,12 +61,13 @@ class Home extends Component {
 
     //TODO add id for user
     onAestheteClickedHandler (username) {
-        if(this.props.isAuthenticated) {
-            this.props.history.push('/aesthete');
-        } else {
-            this.props.onSetAuthRedirectPath('/aesthete');
-            this.props.history.push('/auth')
-        }        
+        this.props.history.push('/aesthete');
+        // if(this.props.isAuthenticated) {
+        //     this.props.history.push('/aesthete');
+        // } else {
+        //     this.props.onSetAuthRedirectPath('/aesthete');
+        //     this.props.history.push('/auth');
+        // }        
     }
 
     // TODO isCraved change all button names
