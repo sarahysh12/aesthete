@@ -5,6 +5,7 @@ import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 import Artwork from '../../components/Artwork/Artwork';
+import profilePic from '../../assets/pic.png';
 
 
 class Profile extends Component {
@@ -140,8 +141,8 @@ class Profile extends Component {
 
     render() {
         // Display arworks
+        // TODO add spinner here
         let arts = <p>Artworks will load here</p>;
-        console.log(this.props.artworks)
         if ( !this.props.loading ) {
             arts = this.props.artworks.map(art => {
                 return (
@@ -187,10 +188,13 @@ class Profile extends Component {
             </form>
         );
         return (
-            <div className={classes.Profile}>
-                <h1>Aesthete Name</h1>
-                <h3>Select a category + Services (select Services by category and userId)</h3>
+            <div>
+                <div className={classes.ProfileBio}>
+                    <h1>Aesthete Name</h1>
+                    <img src={profilePic} alt="profile pic"/>
+                </div>
                 <div className={classes.Artworks}>
+                    {/* <h3>Select a category + Services (select Services by category and userId)</h3> */}
                         {arts}
                 </div>
                 <div className={classes.AddService}>

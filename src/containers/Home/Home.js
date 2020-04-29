@@ -117,6 +117,7 @@ class Home extends Component {
             );
         });
 
+        //TODO side bar nav bar
         //TODO show the full size search bar in mobile view
         return (
             <div>

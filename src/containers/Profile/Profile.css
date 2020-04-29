@@ -1,11 +1,18 @@
-.Profile {
-    
+.ProfileBio{
+    float: left;
+    margin: 50px;
 }
+
+
+.ProfileBio .img {
+    /* margin: 40px 20px; */
+    border-radius: 50%;
+}
+
 
 .AddService {
     border: 1px solid #919090;
     width: 50%;
-    margin: auto;
     padding: 30px;
 }
 
@@ -13,5 +20,4 @@
     display: flex;
     justify-content: center;
     flex-flow: row wrap;   /* move items to the next row when the items more that 5, it makes the UI resonsive */
-    margin: auto;
 }
