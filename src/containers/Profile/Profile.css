@@ -1,11 +1,11 @@
 .ProfileBio{
     float: left;
-    margin: 50px;
+    margin: 20px 50px;
 }
 
 
-.ProfileBio .img {
-    /* margin: 40px 20px; */
+.ProfileBio img {
+    height: 200px;
     border-radius: 50%;
 }
 

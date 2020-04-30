@@ -71,7 +71,9 @@ class Profile extends Component {
     } 
 
     componentDidMount() {
-        this.props.onFetchArtworkById(this.props.token, this.props.userId)
+        this.props.onFetchArtworkById(this.props.token, this.props.userId);
+        this.props.onFetchUserData(this.props.token);
+
     }
 
     checkValidity(value, rules) {
@@ -143,6 +145,11 @@ class Profile extends Component {
         // Display arworks
         // TODO add spinner here
         let arts = <p>Artworks will load here</p>;
+        let aestheteId = <p>User Id</p>;
+
+        if ( !this.props.loading && this.props.email ) {
+            aestheteId = this.props.email.split('@', 1)[0];
+        }
         if ( !this.props.loading ) {
             arts = this.props.artworks.map(art => {
                 return (
@@ -158,7 +165,7 @@ class Profile extends Component {
                         craveClicked={() => this.onCraveClickedHandler(art.id)}
                         isCraveSelected={this.state.isCraved}/>
                 );
-            });
+            }); 
         }
 
         // TODO Clear the for after submission and display a message
@@ -187,10 +194,11 @@ class Profile extends Component {
                 <Button disabled={!this.state.formIsValid}>Add Artwork</Button>
             </form>
         );
+
         return (
             <div>
                 <div className={classes.ProfileBio}>
-                    <h1>Aesthete Name</h1>
+                    <h1>{aestheteId}</h1>
                     <img src={profilePic} alt="profile pic"/>
                 </div>
                 <div className={classes.Artworks}>
@@ -208,6 +216,7 @@ class Profile extends Component {
 const mapStateToProps = state => {
     return {
         userId : state.auth.userId,
+        email: state.auth.email,
         token: state.auth.token,
         artworks: state.artwork.artworks,
         loading: state.artwork.loading
@@ -218,7 +227,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAddArtwork: (artworkData, token) => dispatch(actions.addArtwork(artworkData, token)),
-        onFetchArtworkById: (token, userId) => dispatch(actions.fetchArtworksByUserId(token, userId))
+        onFetchArtworkById: (token, userId) => dispatch(actions.fetchArtworksByUserId(token, userId)),
+        onFetchUserData: (token) => dispatch(actions.fetchUserData(token))
 
     };
 };
