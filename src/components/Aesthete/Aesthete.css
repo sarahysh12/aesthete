@@ -23,7 +23,8 @@
 	outline: none;
 }
 .Aesthete button:hover {
-	background-color:#FFFF8A;
+	background-color:#FFBB99;
+	/* background-color:#FFFF8A; */
 	color: #919090;
 }
 .Aesthete button:active {

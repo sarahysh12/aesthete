@@ -1,12 +1,55 @@
-.ProfileBio{
-    float: left;
-    margin: 20px 50px;
+
+.ProfileCover {
+    width: 100%;
+    background-color: #919090;
+    height: 250px;
+    background-image: url(../../assets/images/cover.jpg);
+    background-size: 100% 250px;
+    background-position: center;
+    background-repeat: no-repeat;
+
 }
 
-
-.ProfileBio img {
+.ProfilePic{
     height: 200px;
+    width: 200px;
     border-radius: 50%;
+    float: left;
+    margin-top: 140px;
+    margin-left: 100px;
+    border: 3px solid white;
+}
+
+.ProfileContent {
+    margin-top: 100px;
+    display: flex;
+}
+
+.ProfileBio {
+    flex: 25%;
+    color: #919090;
+    font-size: 19px;
+}
+
+.ProfileBio hr{
+    width: 90%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0)); 
+}
+
+.ProfileDescription {
+    font-size: 15px;
+    padding:20px;
+}
+
+.ProfileServices {
+    float: left;
+    /* background-color: wheat; */
+    /* 
+    justify-content: center;
+    flex-flow: row wrap;  */
+    flex: 75%;
 }
 
 
@@ -20,4 +63,5 @@
     display: flex;
     justify-content: center;
     flex-flow: row wrap;   /* move items to the next row when the items more that 5, it makes the UI resonsive */
+    margin-left: 200px;
 }

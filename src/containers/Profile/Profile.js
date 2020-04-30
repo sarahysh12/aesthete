@@ -5,7 +5,8 @@ import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 import Artwork from '../../components/Artwork/Artwork';
-import profilePic from '../../assets/pic.png';
+import profilePic from '../../assets/images/pic.png';
+// import profileCoverPic from '../../assets/images/cover.jpg';
 
 
 class Profile extends Component {
@@ -197,17 +198,30 @@ class Profile extends Component {
 
         return (
             <div>
-                <div className={classes.ProfileBio}>
-                    <h1>{aestheteId}</h1>
-                    <img src={profilePic} alt="profile pic"/>
+                <div className={classes.ProfileCover}>
+                    <div>
+                        <img className={classes.ProfilePic} src={profilePic} alt="profile pic"/>
+                    </div>
                 </div>
-                <div className={classes.Artworks}>
-                    {/* <h3>Select a category + Services (select Services by category and userId)</h3> */}
-                        {arts}
+                <div className={classes.ProfileContent}>
+                    <div className={classes.ProfileBio}>
+                        <p><strong>{aestheteId}</strong></p>
+                        <p>{this.props.email}</p>
+                        <hr/>
+                        <p className={classes.ProfileDescription}>Hi ! My name is Sara Yarshenas. I'm a Software Engineer from San Francisco. I also enjoy painting and playing music.</p>
+                        <hr/>
+                    </div>
+                    <div className={classes.ProfileServices}>
+                        <div className={classes.Artworks}>
+                            {/* <h3>Select a category + Services (select Services by category and userId)</h3> */}
+                                {arts}
+                        </div>
+                        {/* <div className={classes.AddService}>
+                            {form}
+                        </div> */}
+                    </div>
                 </div>
-                <div className={classes.AddService}>
-                    {form}
-                </div>
+                
             </div>
         );
     }
