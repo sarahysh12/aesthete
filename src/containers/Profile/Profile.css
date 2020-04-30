@@ -21,7 +21,7 @@
 }
 
 .ProfileContent {
-    margin-top: 100px;
+    margin-top: 70px;
     display: flex;
 }
 
@@ -30,6 +30,31 @@
     color: #919090;
     font-size: 19px;
 }
+/* 
+.ProfileNavBarItems {
+} */
+
+.ProfileNavBar {
+
+}
+
+.ProfileNavItems {
+    margin-top: 20px;
+    margin-left: 30%;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 100%;
+}
+
+@media (min-width: 500px) {
+    .ProfileNavItems {
+        flex-flow: row;
+    }
+}
+
 
 .ProfileBio hr{
     width: 90%;

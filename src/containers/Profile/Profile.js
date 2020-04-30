@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import Artwork from '../../components/Artwork/Artwork';
 import profilePic from '../../assets/images/pic.png';
 // import profileCoverPic from '../../assets/images/cover.jpg';
+import NavigationItem from '../../components/Navigation/NavigationItems/NavigationItem/NavigationItem';
 
 
 class Profile extends Component {
@@ -202,6 +203,14 @@ class Profile extends Component {
                     <div>
                         <img className={classes.ProfilePic} src={profilePic} alt="profile pic"/>
                     </div>
+                </div>
+                <div >
+                    <ul className={classes.ProfileNavItems}>
+                        <NavigationItem link="/">Artworks</NavigationItem>
+                        <NavigationItem link="/">Gallery</NavigationItem>
+                        <NavigationItem link="/">My Portfolio</NavigationItem>
+                        <NavigationItem link="/">Contact Me</NavigationItem>
+                    </ul>
                 </div>
                 <div className={classes.ProfileContent}>
                     <div className={classes.ProfileBio}>
