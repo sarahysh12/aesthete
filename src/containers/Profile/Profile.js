@@ -4,7 +4,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
-import Artwork from '../../components/Artwork/Artwork';
+import Artwork from './Artwork/Artwork';
 import profilePic from '../../assets/images/pic.png';
 // import profileCoverPic from '../../assets/images/cover.jpg';
 import NavigationItem from '../../components/Navigation/NavigationItems/NavigationItem/NavigationItem';
@@ -204,12 +204,12 @@ class Profile extends Component {
                         <img className={classes.ProfilePic} src={profilePic} alt="profile pic"/>
                     </div>
                 </div>
-                <div >
+                <div>
                     <ul className={classes.ProfileNavItems}>
-                        <NavigationItem link="/">Artworks</NavigationItem>
-                        <NavigationItem link="/">Gallery</NavigationItem>
-                        <NavigationItem link="/">My Portfolio</NavigationItem>
-                        <NavigationItem link="/">Contact Me</NavigationItem>
+                        <NavigationItem link="/" whiteNav>Artworks</NavigationItem>
+                        <NavigationItem link="/" whiteNav>Gallery</NavigationItem>
+                        <NavigationItem link="/" whiteNav>My Portfolio</NavigationItem>
+                        <NavigationItem link="/" whiteNav>Contact Me</NavigationItem>
                     </ul>
                 </div>
                 <div className={classes.ProfileContent}>
@@ -220,8 +220,8 @@ class Profile extends Component {
                         <p className={classes.ProfileDescription}>Hi ! My name is Sara Yarshenas. I'm a Software Engineer from San Francisco. I also enjoy painting and playing music.</p>
                         <hr/>
                     </div>
-                    <div className={classes.ProfileServices}>
-                        <div className={classes.Artworks}>
+                    <div>
+                        <div className={classes.ProfileServices}>
                             {/* <h3>Select a category + Services (select Services by category and userId)</h3> */}
                                 {arts}
                         </div>
