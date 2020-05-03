@@ -14,32 +14,44 @@
 	border-radius: 10px;
 }
 
-.ColoredTitle {
+.Artwork p {
+	display: block;
+}
+
+.ColoredTitle p{
 	color: #fcac83;
-	font-size: 14px;
+	font-size: 12px;
 	text-transform: uppercase;
-	float: left;
-	padding-left: 10px;
 	font-weight: 600;
+	width: 100%;
+	text-align: left;
 }
 
 .Title {
 	color: #757373;
-	font-size: 15px;
+	font-size: 13px;
 	text-transform: uppercase;
 	font-weight: bold;
+	text-align: left;
+	width: 100%;
 }
 
 .Description{
 	color: #919090;
-	float: left;
+	text-align: left;
+	font-size: 14px;
+	width: 100%;
+	text-align: justify;
 
 }
 
+.ColoredText {
+	color: #fcac83;
+	font-size: 12px;
+	font-style: italic;
+}
 
 /* 
-
-
 .Artwork button {
 	background:#ffffff;
 	border: 1px solid #919090;

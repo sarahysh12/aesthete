@@ -4,11 +4,11 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
-import Artwork from './Artwork/Artwork';
+import Artwork from './Artworks/Artwork/Artwork';
 import profilePic from '../../assets/images/pic.png';
 // import profileCoverPic from '../../assets/images/cover.jpg';
 import NavigationItem from '../../components/Navigation/NavigationItems/NavigationItem/NavigationItem';
-
+import Bio from './Bio/Bio';
 
 class Profile extends Component {
     state = {
@@ -144,14 +144,13 @@ class Profile extends Component {
     }
 
     render() {
-        // Display arworks
+        let bio = null;
+        if ( !this.props.loading && this.props.email ) {
+            bio = <Bio isLoading={this.props.loading} user={this.props.email}/>
+        }
+        
         // TODO add spinner here
         let arts = <p>Artworks will load here</p>;
-        let aestheteId = <p>User Id</p>;
-
-        if ( !this.props.loading && this.props.email ) {
-            aestheteId = this.props.email.split('@', 1)[0];
-        }
         if ( !this.props.loading ) {
             arts = this.props.artworks.map(art => {
                 return (
@@ -169,6 +168,7 @@ class Profile extends Component {
                 );
             }); 
         }
+
 
         // TODO Clear the for after submission and display a message
 
@@ -197,6 +197,8 @@ class Profile extends Component {
             </form>
         );
 
+
+
         return (
             <div>
                 <div className={classes.ProfileCover}>
@@ -214,11 +216,7 @@ class Profile extends Component {
                 </div>
                 <div className={classes.ProfileContent}>
                     <div className={classes.ProfileBio}>
-                        <p><strong>{aestheteId}</strong></p>
-                        <p>{this.props.email}</p>
-                        <hr/>
-                        <p className={classes.ProfileDescription}>Hi ! My name is Sara Yarshenas. I'm a Software Engineer from San Francisco. I also enjoy painting and playing music.</p>
-                        <hr/>
+                       {bio}
                     </div>
                     <div>
                         <div className={classes.ProfileServices}>

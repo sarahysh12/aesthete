@@ -106,16 +106,16 @@ class Home extends Component {
         else {
             artistSource = this.props.artists
         }
-        artists = artistSource.map(artist => {
-            return (
-                <Aesthete 
-                    key = {artist.aesthete_full_name}
-                    name={artist.aesthete_full_name}
-                    speciality={artist.category}
-                    rating={artist.rating}
-                    aestheteClicked={() => this.onAestheteClickedHandler(artist.aesthete_username)}/>
-            );
-        });
+        // artists = artistSource.map(artist => {
+        //     return (
+        //         <Aesthete 
+        //             key = {artist.id}
+        //             name={artist.aesthete_full_name}
+        //             speciality={artist.category}
+        //             rating={artist.rating}
+        //             aestheteClicked={() => this.onAestheteClickedHandler(artist.aesthete_username)}/>
+        //     );
+        // });
 
         //TODO side bar nav bar
         //TODO show the full size search bar in mobile view
