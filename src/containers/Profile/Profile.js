@@ -156,12 +156,13 @@ class Profile extends Component {
                 return (
                     <Artwork 
                         key = {art.id}
+                        id = {art.id}
                         title={art.artworkData.artwork_title}
                         category={art.artworkData.artwork_type}
                         description={art.artworkData.artwork_description}
                         artist={art.userId}
                         price={art.artworkData.price}
-                        rating={art.artworkData.rating}
+                        rating={art.rating}
                         date={art.created_date}
                         craveClicked={() => this.onCraveClickedHandler(art.id)}
                         isCraveSelected={this.state.isCraved}/>

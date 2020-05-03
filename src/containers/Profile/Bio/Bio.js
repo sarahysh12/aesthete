@@ -65,7 +65,6 @@ class Bio extends Component {
             }
             this.updateCategoryTags(updatedAestheteData);
             event.target.value = '';
-            console.log(this.state.loading);
         }
     }
 
