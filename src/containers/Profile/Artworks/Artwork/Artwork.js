@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Artwork.css';
 import pic from '../../../../assets/images/artwork.jpg';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoins } from '@fortawesome/fontawesome-free-solid';
 import Rating from '../../../../components/UI/Rating/Rating';
 

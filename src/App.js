@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import * as actions from './store/actions/index';
 import Layout from './hoc/Layout/Layout';
 import Logout from './containers/Auth/Logout/Logout';
+import NewArtwork from './containers/Profile/NewArtwork/NewArtwork';
 
 class App extends Component {
   
@@ -30,7 +31,7 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/logout" component={Logout} />
-          <Route path='/aesthete' component={Profile}/>
+          <Route path='/aesthete/artworks' component={Profile}/>
           <Route path="/" exact component={Home}/>
           <Redirect to="/" />
         </Switch>

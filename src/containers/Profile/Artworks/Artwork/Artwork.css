@@ -1,12 +1,10 @@
 .Artwork{
     width: 300px;
-    /* border: 1px solid #eee; */
     padding: 10px;
-    /* box-shadow: 0 2px 3px #ccc; */
-    /* box-sizing: border-box;  what does this do? */
     cursor: pointer;
     text-align: center;
-    margin: 20px;
+	margin: 20px;
+	/* height: 470px; */
 }
 .Artwork img {
 	width: 300px;
@@ -42,7 +40,6 @@
 	font-size: 14px;
 	width: 100%;
 	text-align: justify;
-
 }
 
 .ColoredText {
