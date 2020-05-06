@@ -6,7 +6,9 @@ import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import * as actions from '../../../store/actions/index';
 
-//TODO price validation doesn't work
+
+//Cancel button is not working in modal
+
 class NewArtwork extends Component {
 
     state = {
@@ -28,11 +30,12 @@ class NewArtwork extends Component {
                 elementType: 'textarea',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'My Art/Service is ...'
+                    placeholder: 'Art (Minimum 350 Characters)'
                 },
                 value: '',
                 validation: {
-                    required: true
+                    required: true,
+                    minLength: 350
                 },
                 valid: false,
                 touched: false
@@ -108,6 +111,7 @@ class NewArtwork extends Component {
             created_date: new Date()
         }
         this.props.onAddArtwork(artwork, this.props.token);
+        this.props.newArtCancelled();
     }
 
     render() {

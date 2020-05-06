@@ -8,11 +8,15 @@ import * as actions from '../../../store/actions/index';
 import Aux from '../../../hoc/Aux/Aux';
 import Modal from '../../../components/UI/Modal/Modal';
 import NewArtwork from '../NewArtwork/NewArtwork';
+import Backdrop from '../../../components/UI/Backdrop/Backdrop';
+import Transition from 'react-transition-group/Transition';
 
 class Artworks extends Component {
 
     state = {
-        hasNewArtClicked : false
+        // hasNewArtClicked : false,
+        modalIsOpen: false,
+        showBlock: false
     }
 
     componentDidMount() {
@@ -20,18 +24,27 @@ class Artworks extends Component {
         this.props.onFetchUserData(this.props.token);
     }
 
-    onAddNewArtwork = () => {
-        // this.props.history.push('/aesthete/newart');
-        this.setState({hasNewArtClicked: true});
+    showModal = () => {
+        this.setState({modalIsOpen: true});
     }
 
-    newArtCancelHandler = () => {
-        this.setState({hasNewArtClicked: false});
+    closeModal = () => {
+        this.setState({modalIsOpen: false});
     }
+
+    // onAddNewArtwork = () => {
+    //     // this.props.history.push('/aesthete/newart');
+    //     this.setState({hasNewArtClicked: true});
+    // }
+
+    // newArtCancelHandler = () => {
+    //     this.setState({hasNewArtClicked: false});
+    // }
 
 
     render () {
-        let arts = <p>Artworks will load here</p>;
+        let arts = null;
+        let addArt = null;
         if ( !this.props.loading ) {
             arts = this.props.artworks.map(art => {
                 return (
@@ -47,22 +60,25 @@ class Artworks extends Component {
                         date={art.created_date}/>
                 );
             }); 
-        }
-        const artworks = (
-            <div className={classes.ProfileArtworkList}>
-                {arts}
-                <div className={classes.AddArtwork} onClick={this.onAddNewArtwork}>
+            addArt = (
+                <div className={classes.AddArtwork} onClick={this.showModal}>
                     <FontAwesomeIcon icon={faPlus}/>
                 </div>
-            </div>
-        );
-        const newArt = <NewArtwork newArtCancelled={this.newArtCancelHandler}/>
+            );
+        }
+        const newArt = <NewArtwork newArtCancelled={this.closeModal}/>
         return (
             <Aux>
-                <Modal show={this.state.hasNewArtClicked} modalClosed={this.newArtCancelHandler}>
+                
+                <div className={classes.ProfileArtworkList}>
+                    {arts}
+                    {addArt}
+                </div>
+
+                <Modal show={this.state.modalIsOpen} closed={this.closeModal}>
                     {newArt}
                 </Modal>
-                {artworks}
+                {this.state.modalIsOpen ? <Backdrop show/>: null} 
             </Aux>
         );
     }

@@ -4,7 +4,6 @@
     box-sizing: border-box;
 
 }
-
 .Label {
     font-weight: bold;
     display: block;
@@ -29,12 +28,11 @@
 }
 
 .Invalid {
-    border: 1px solid red;
-    background-color: #FDA49A;
+    border-bottom: 1px solid #f24430;
 }
 
 
 .ValidationError {
-    color: red;
+    color: #f24430;
     margin: 5px 0;
 } 

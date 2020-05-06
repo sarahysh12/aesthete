@@ -8,16 +8,17 @@
 	outline: none;
 	margin: 10px;
 }
-/* 
-.Button:first-of-type {
+
+/* .Button:first-of-type {
     margin-left: 0;
     padding-left: 0;
-}
+} */
 
 .Button:disabled {
     color: #ccc;
     cursor: not-allowed;
-}*/
+	border: 1px solid #ccc;
+}
 
 .Success {
     color: #FFBB99;
