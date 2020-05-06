@@ -1,13 +1,12 @@
 .Button {
     cursor: pointer;
 	background: white;
-	border: 1px solid #FFBB99;
 	border-radius: 1000px;
 	padding: 8px 25px;
-	color:#FFBB99;
 	display: inline-block;
 	text-align: center;
 	outline: none;
+	margin: 10px;
 }
 /* 
 .Button:first-of-type {
@@ -18,12 +17,14 @@
 .Button:disabled {
     color: #ccc;
     cursor: not-allowed;
-}
+}*/
 
 .Success {
-    color: #5C9210;
+    color: #FFBB99;
+	border: 1px solid #FFBB99;
 }
 
-.Danger {
-    color: #944317;
-} */
+.Default {
+    color: #919090;
+	border: 1px solid #919090;
+} 

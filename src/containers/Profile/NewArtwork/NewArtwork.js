@@ -6,7 +6,7 @@ import Button from '../../../components/UI/Button/Button';
 import Input from '../../../components/UI/Input/Input';
 import * as actions from '../../../store/actions/index';
 
-
+//TODO price validation doesn't work
 class NewArtwork extends Component {
 
     state = {
@@ -134,8 +134,8 @@ class NewArtwork extends Component {
                         changed={(event) => this.inputChangeHandler(event, formElement.id)}
                     />
                 ))}
-                <Button disabled={!this.state.formIsValid}>Add Artwork</Button>
-                <Button clicked={this.props.newArtCancelled}>Cancel</Button>
+                <Button btnType='Success' disabled={!this.state.formIsValid}>Add Artwork</Button>
+                <Button btnType='Default' clicked={this.props.newArtCancelled} >Cancel</Button>
             </form>
         );
         return (
