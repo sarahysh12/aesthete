@@ -69,9 +69,9 @@ class NewArtwork extends Component {
         },
         formIsValid: false
     } 
-
+ 
+    //???
     componentDidUpdate() {
-        console.log(this.props.token)
         this.props.onFetchUserData(this.props.token);
     }
 
@@ -135,6 +135,7 @@ class NewArtwork extends Component {
                     />
                 ))}
                 <Button disabled={!this.state.formIsValid}>Add Artwork</Button>
+                <Button clicked={this.props.newArtCancelled}>Cancel</Button>
             </form>
         );
         return (

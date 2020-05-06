@@ -5,8 +5,15 @@ import { faPlus } from '@fortawesome/fontawesome-free-solid';
 import Artwork from './Artwork/Artwork';
 import  { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
+import Aux from '../../../hoc/Aux/Aux';
+import Modal from '../../../components/UI/Modal/Modal';
+import NewArtwork from '../NewArtwork/NewArtwork';
 
 class Artworks extends Component {
+
+    state = {
+        hasNewArtClicked : false
+    }
 
     componentDidMount() {
         this.props.onFetchArtworkById(this.props.token, this.props.userId);
@@ -14,7 +21,12 @@ class Artworks extends Component {
     }
 
     onAddNewArtwork = () => {
-        this.props.history.push('/aesthete/newart');
+        // this.props.history.push('/aesthete/newart');
+        this.setState({hasNewArtClicked: true});
+    }
+
+    newArtCancelHandler = () => {
+        this.setState({hasNewArtClicked: false});
     }
 
 
@@ -36,13 +48,22 @@ class Artworks extends Component {
                 );
             }); 
         }
-        return (
+        const artworks = (
             <div className={classes.ProfileArtworkList}>
                 {arts}
                 <div className={classes.AddArtwork} onClick={this.onAddNewArtwork}>
                     <FontAwesomeIcon icon={faPlus}/>
                 </div>
             </div>
+        );
+        const newArt = <NewArtwork newArtCancelled={this.newArtCancelHandler}/>
+        return (
+            <Aux>
+                <Modal show={this.state.hasNewArtClicked} modalClosed={this.newArtCancelHandler}>
+                    {newArt}
+                </Modal>
+                {artworks}
+            </Aux>
         );
     }
 }
