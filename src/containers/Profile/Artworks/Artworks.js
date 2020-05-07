@@ -9,18 +9,16 @@ import Aux from '../../../hoc/Aux/Aux';
 import Modal from '../../../components/UI/Modal/Modal';
 import NewArtwork from '../NewArtwork/NewArtwork';
 import Backdrop from '../../../components/UI/Backdrop/Backdrop';
-import Transition from 'react-transition-group/Transition';
 
 class Artworks extends Component {
 
     state = {
-        // hasNewArtClicked : false,
         modalIsOpen: false,
         showBlock: false
     }
 
     componentDidMount() {
-        this.props.onFetchArtworkById(this.props.token, this.props.userId);
+        this.props.onFetchArtworksByUser(this.props.token, this.props.userId);
         this.props.onFetchUserData(this.props.token);
     }
 
@@ -32,15 +30,9 @@ class Artworks extends Component {
         this.setState({modalIsOpen: false});
     }
 
-    // onAddNewArtwork = () => {
-    //     // this.props.history.push('/aesthete/newart');
-    //     this.setState({hasNewArtClicked: true});
-    // }
-
-    // newArtCancelHandler = () => {
-    //     this.setState({hasNewArtClicked: false});
-    // }
-
+    onClickShowMore = (artId) => {
+        this.props.history.push(this.props.match.path+'/'+artId);
+    }
 
     render () {
         let arts = null;
@@ -57,7 +49,9 @@ class Artworks extends Component {
                         artist={art.userId}
                         price={art.artworkData.price}
                         rating={art.rating}
-                        date={art.created_date}/>
+                        date={art.created_date}
+                        showMoreClicked={() => this.onClickShowMore(art.id)}
+                        />
                 );
             }); 
             addArt = (
@@ -97,7 +91,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchArtworkById: (token, userId) => dispatch(actions.fetchArtworksByUserId(token, userId)),
+        onFetchArtworksByUser: (token, userId) => dispatch(actions.fetchArtworksByUserId(token, userId)),
         onFetchUserData: (token) => dispatch(actions.fetchUserData(token))
 
     };

@@ -23,7 +23,7 @@ class App extends Component {
       <Switch>
         <Route path="/auth" component={Auth} />
         <Route path="/" exact component={Home}/>
-        <Redirect to="/"/>
+        {/* <Redirect to="/"/> */}
       </Switch>
     );
 
@@ -31,7 +31,7 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/logout" component={Logout} />
-          <Route path='/aesthete/artworks' component={Profile}/>
+          <Route path='/aesthete' component={Profile}/>
           <Route path="/" exact component={Home}/>
           <Redirect to="/" />
         </Switch>

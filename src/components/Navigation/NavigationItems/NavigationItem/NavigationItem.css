@@ -57,4 +57,5 @@
 .WhiteNavigation a:hover,
 .WhiteNavigation a:focus {
     border-bottom: 4px solid #919090;
+    color: #919090;
 }

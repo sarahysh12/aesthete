@@ -6,8 +6,9 @@ import profilePic from '../../assets/images/pic.png';
 import NavigationItem from '../../components/Navigation/NavigationItems/NavigationItem/NavigationItem';
 import Bio from './Bio/Bio';
 import NewArtwork from './NewArtwork/NewArtwork';
-import { Route, withRouter, Switch } from 'react-router-dom';
+import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import Artworks from './Artworks/Artworks';
+import FullArtwork from './FullArtwork/FullArtwork';
 
 
 
@@ -26,6 +27,13 @@ class Profile extends Component {
         if ( !this.props.loading && this.props.email ) {
             bio = <Bio isLoading={this.props.loading} user={this.props.email}/>
         }
+        let navigations = (
+            <ul className={classes.ProfileNavItems}>
+                        <NavigationItem link={this.props.match.path+"/artworks"} whiteNav>Artworks</NavigationItem>
+                        <NavigationItem link={this.props.match.path+"/newart"} whiteNav>New Artwork</NavigationItem>
+                        <NavigationItem link="/" whiteNav>Contact Me</NavigationItem>
+            </ul>
+        );
 
         //TODO add filter by category
         return (
@@ -35,23 +43,17 @@ class Profile extends Component {
                         <img className={classes.ProfilePic} src={profilePic} alt="profile pic"/>
                     </div>
                 </div>
-                <div>
-                    <ul className={classes.ProfileNavItems}>
-                        <NavigationItem link="/aesthete" whiteNav>Artworks</NavigationItem>
-                        <NavigationItem link="/aesthete" whiteNav>New Artwork</NavigationItem>
-                        <NavigationItem link="/" whiteNav>Gallery</NavigationItem>
-                        <NavigationItem link="/" whiteNav>My Portfolio</NavigationItem>
-                        <NavigationItem link="/" whiteNav>Contact Me</NavigationItem>
-                    </ul>
-                </div>
+                {navigations}
                 <div className={classes.Profile}>
                     <div className={classes.ProfileBio}>
                        {bio}
                     </div>
                     <div className={classes.ProfileContent}>
                         <Switch>
-                            <Route path='/aesthete/artworks' component={Artworks}/>
-                            <Route path='/aesthete/newart' component={NewArtwork}/>
+                            <Route  path='/aesthete/artworks/:artid' component={FullArtwork}/>
+                            <Route  path='/aesthete/artworks' component={Artworks}/>
+                            <Route  path='/aesthete/newart' component={NewArtwork}/>
+                            <Redirect to='/aesthete/artworks' />
                         </Switch>
                     </div>
                 </div>

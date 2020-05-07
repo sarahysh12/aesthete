@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoins } from '@fortawesome/fontawesome-free-solid';
 import Rating from '../../../../components/UI/Rating/Rating';
 
-//TODO what's next on click show more
 
 const artwork = (props) => {
     let subStringTitle = props.title.substring(0,35);
@@ -24,7 +23,7 @@ const artwork = (props) => {
             <div className={classes.Title}><p>{subStringTitle}</p></div>
             <div className={classes.Description}>
                 <p>{props.description.substring(0, 350)} . . .  
-                <span className={classes.ColoredText}> Show More</span>
+                <span className={classes.ColoredText} onClick={props.showMoreClicked}> Show More</span>
                 </p>
             </div>
             <div className={classes.Icons}>
