@@ -7,7 +7,7 @@ import Input from '../../../components/UI/Input/Input';
 import * as actions from '../../../store/actions/index';
 
 
-//Cancel button is not working in modal
+// TODO Cancel button is not working in modal
 
 class NewArtwork extends Component {
 
@@ -73,7 +73,7 @@ class NewArtwork extends Component {
         formIsValid: false
     } 
  
-    //???
+    // TODO ???
     componentDidUpdate() {
         this.props.onFetchUserData(this.props.token);
     }

@@ -16,21 +16,16 @@
   color: #635e5d;
 }
 
+.Artworks {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;   /* move items to the next row when the items more that 5, it makes the UI resonsive */
+  margin: auto;
+}
 
-  .Artworks {
-    display: flex;
-    justify-content: center;
-    flex-flow: row wrap;   /* move items to the next row when the items more that 5, it makes the UI resonsive */
-    margin: auto;
-  }
-/* 
-  .Artworks h1 {
-    margin: 100px;
-  } */
-
-  .Aesthetes {
-    display: flex;
-    justify-content: center;
-    flex-flow: row wrap;   /* move items to the next row when the items more that 5, it makes the UI resonsive */
-    margin: auto;
-  }
+.Aesthetes {
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap; 
+  margin: auto;
+}

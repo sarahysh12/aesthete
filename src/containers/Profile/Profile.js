@@ -10,7 +10,8 @@ import { Route, withRouter, Switch, Redirect } from 'react-router-dom';
 import Artworks from './Artworks/Artworks';
 import FullArtwork from './FullArtwork/FullArtwork';
 
-
+//TODO add filter by category
+//TODO new artwork is wide when it is shown in profiles
 
 class Profile extends Component {
     state = {
@@ -35,7 +36,6 @@ class Profile extends Component {
             </ul>
         );
 
-        //TODO add filter by category
         return (
             <div>
                 <div className={classes.ProfileCover}>

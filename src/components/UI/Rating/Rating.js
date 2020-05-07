@@ -1,9 +1,8 @@
 import React from 'react';
 import classes from './Rating.css';
 
+//TODO implement change handlere and disable (read only)
 const rating = (props) => (
-        
-    //TODO implement change handlere and disable (read only)
         <span className={classes.starRating}>
             <input id="rating5" type="radio" name={props.id} value="5" checked={props.ratingValue === 5} />
             <label htmlFor="rating5">5</label>

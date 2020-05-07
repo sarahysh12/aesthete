@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import classes from './Home.css';
 import axios from '../../axios';
 import Artwork from '../../components/Artwork/Artwork';
-import Aesthete from '../../components/Aesthete/Aesthete';
 import Search from '../../components/Search/Search';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';

@@ -16,7 +16,6 @@ class Modal extends Component {
             enter: 400,
             enxit: 1000
         };
-
         return (
             <CSSTransition
                 mountOnEnter
@@ -31,7 +30,6 @@ class Modal extends Component {
                     }}>
                     <div className={classes.Modal}>
                         {this.props.children}
-                        {/* <button onClick={this.props.closed}>Dismiss</button> */}
                     </div>
             </CSSTransition>
         );

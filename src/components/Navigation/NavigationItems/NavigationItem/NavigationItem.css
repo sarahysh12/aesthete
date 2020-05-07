@@ -13,11 +13,9 @@
     display: block;
 }
 
-
 .NavigationItem a:hover,
 .NavigationItem a:active,
 .NavigationItem a.active {
-    /* color: #FFFF8A; */
     color: white;
 }
 
@@ -45,14 +43,11 @@
     }
 }
 
-
-
 .WhiteNavigation a.active {
     background-color: white;
     color: #919090;
     width: 150px;
 }
-
 
 .WhiteNavigation a:hover,
 .WhiteNavigation a:focus {
