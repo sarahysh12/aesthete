@@ -1,5 +1,7 @@
 export {
-    fetchArtworks
+    fetchArtworks,
+    addArtwork,
+    fetchArtworksByUserId
 }
 from './artwork';
 export {
@@ -10,5 +12,6 @@ export {
     auth,
     logout,
     setAuthRedirectPath,
-    authCheckState
+    authCheckState,
+    fetchUserData
 } from './auth';

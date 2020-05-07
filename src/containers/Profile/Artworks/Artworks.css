@@ -1,0 +1,26 @@
+
+.ProfileArtworkList{
+    display: flex;
+    justify-content: left;
+    flex-flow: row wrap;   
+}
+
+.AddArtwork {
+    border: 1px solid #c7c3c3;
+    width: 300px;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    margin: 20px;
+    padding-top: 250px;
+    font-size: 50px;
+    color: #c7c3c3;
+    /* height: 470px;  */
+}
+
+
+.AddArtwork:hover {
+    color: #919090;
+    border: 1px solid #919090;
+}

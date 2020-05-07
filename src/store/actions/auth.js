@@ -48,13 +48,12 @@ export const auth = (email, password, isSignup) => {
             password: password,
             returnSecureToken: true
         };
-        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=';
+        let url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyAe60NHwYQUfoCzFmFwC1PZ1L9n-elVcAc';
         if(!isSignup) {
-            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=';
+            url = 'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyAe60NHwYQUfoCzFmFwC1PZ1L9n-elVcAc';
         }
         axios.post(url, authData)
             .then(response => {
-                console.log(response);
                 const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
                 localStorage.setItem('token', response.data.idToken);
                 localStorage.setItem('expirationDate', expirationDate);
@@ -91,4 +90,44 @@ export const authCheckState = () => {
             }   
         }
     };
+};
+
+
+export const fetchUserDataStart = () => {
+    return {
+        type: actionTypes.FETCH_USER_DATA_START
+    };
+};
+
+export const fetchUserDataSuccess = (email) => {
+    return {
+        type: actionTypes.FETCH_USER_DATA_SUCCESS,
+        email: email
+    };
+};
+
+export const fetchUserDataFail = (error) => {
+    return {
+        type: actionTypes.FETCH_USER_DATA_FAIL, 
+        error: error
+    };
+};
+
+export const fetchUserData = () => {
+    return dispatch => {
+        dispatch(fetchUserDataStart());
+        const tokenData = {
+            idToken: localStorage.getItem('token')
+        };
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyAe60NHwYQUfoCzFmFwC1PZ1L9n-elVcAc';
+        axios.post(url, tokenData)
+        .then(response => {
+            dispatch(fetchUserDataSuccess(response.data.users[0].email))
+        })
+        .catch(error => {
+            console.log(error);
+            dispatch(fetchUserDataFail(error.response.data.error));
+        });
+
+    }
 };

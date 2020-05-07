@@ -1,0 +1,31 @@
+.FullArtwork {
+    width: 90%;
+    margin: auto;
+    color: #757373;
+    display: flex;
+
+}
+.FullArtwork img{
+	width: 400px;
+	height: 300px;
+	border-radius: 5px;
+}
+.Image {
+    flex: 20%;
+    float: left;
+}
+
+.Content {
+    flex: 80%;
+    text-align: left;
+    padding: 20px;
+}
+
+.Title {
+	color: #919090;
+	font-size: 24px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: center;
+	/* width: 100%; */
+}

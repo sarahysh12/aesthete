@@ -3,12 +3,11 @@
     border: 1px solid #eee;
     padding: 20px;
     box-shadow: 0 2px 3px #ccc;
-    /* box-sizing: border-box;  what does this do? */
+    /* box-sizing: border-box; ???? */
     cursor: pointer;
     text-align: center;
     margin: 20px;
 }
-
 
 .Artwork button {
 	background:#ffffff;
@@ -20,6 +19,7 @@
 	text-align: center;
 	outline: none;
 }
+
 .Artwork button:hover {
 	background-color:#FFBB99;
 	color: white;

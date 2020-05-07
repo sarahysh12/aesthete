@@ -1,0 +1,57 @@
+.Artwork{
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+	margin: 20px;
+	/* height: 470px; */
+}
+.Artwork img {
+	width: 300px;
+	height: 200px;
+	border-radius: 10px;
+}
+
+.Artwork span {
+	cursor: pointer;
+}
+
+.Artwork p {
+	display: block;
+}
+
+.ColoredTitle p{
+	color: #fcac83;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: 600;
+	width: 100%;
+	text-align: left;
+}
+
+.Title {
+	color: #757373;
+	font-size: 13px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: left;
+	width: 100%;
+}
+
+.Description{
+	color: #919090;
+	text-align: left;
+	font-size: 14px;
+	width: 100%;
+	text-align: justify;
+}
+
+.ColoredText {
+	color: #fcac83;
+	font-size: 12px;
+	font-style: italic;
+}
+
+.Icons {
+	text-align: left;
+	color: #919090;
+}

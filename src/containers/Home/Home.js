@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import classes from './Home.css';
 import axios from '../../axios';
 import Artwork from '../../components/Artwork/Artwork';
-import Aesthete from '../../components/Aesthete/Aesthete';
 import Search from '../../components/Search/Search';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
@@ -65,7 +64,7 @@ class Home extends Component {
             this.props.history.push('/aesthete');
         } else {
             this.props.onSetAuthRedirectPath('/aesthete');
-            this.props.history.push('/auth')
+            this.props.history.push('/auth');
         }        
     }
 
@@ -80,17 +79,20 @@ class Home extends Component {
         else {
             artSource = this.props.arts
         }
+        //TODO make this dynamic for names
+        //TODO convert userId to name
         arts = artSource.map(art => {
             return (
                 <Artwork 
                     key = {art.id}
-                    title={art.artwork_title}
-                    category={art.artwork_type}
-                    description={art.description}
-                    artist={art.artist}
-                    price={art.price}
-                    rating={art.rating}
-                    craveClicked={() => this.onCraveClickedHandler(art.artwork_id)}
+                    title={art.artworkData.artwork_title}
+                    category={art.artworkData.artwork_type}
+                    description={art.artworkData.artwork_description}
+                    artist={art.userId}
+                    price={art.artworkData.price}
+                    rating={art.artworkData.rating}
+                    date={art.created_date}
+                    craveClicked={() => this.onCraveClickedHandler(art.id)}
                     isCraveSelected={this.state.isCraved}/>
             );
         });
@@ -103,17 +105,18 @@ class Home extends Component {
         else {
             artistSource = this.props.artists
         }
-        artists = artistSource.map(artist => {
-            return (
-                <Aesthete 
-                    key = {artist.aesthete_full_name}
-                    name={artist.aesthete_full_name}
-                    speciality={artist.category}
-                    rating={artist.rating}
-                    aestheteClicked={() => this.onAestheteClickedHandler(artist.aesthete_username)}/>
-            );
-        });
+        // artists = artistSource.map(artist => {
+        //     return (
+        //         <Aesthete 
+        //             key = {artist.id}
+        //             name={artist.aesthete_full_name}
+        //             speciality={artist.category}
+        //             rating={artist.rating}
+        //             aestheteClicked={() => this.onAestheteClickedHandler(artist.aesthete_username)}/>
+        //     );
+        // });
 
+        //TODO side bar nav bar
         //TODO show the full size search bar in mobile view
         return (
             <div>

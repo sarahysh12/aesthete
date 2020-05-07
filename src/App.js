@@ -9,23 +9,29 @@ import { connect } from 'react-redux';
 import * as actions from './store/actions/index';
 import Layout from './hoc/Layout/Layout';
 import Logout from './containers/Auth/Logout/Logout';
+import NewArtwork from './containers/Profile/NewArtwork/NewArtwork';
 
 class App extends Component {
   
+  componentDidMount() {
+    this.props.onTryAutoSignup();
+    
+  }
+
   render() {
     let routes = (
       <Switch>
         <Route path="/auth" component={Auth} />
         <Route path="/" exact component={Home}/>
-        <Redirect to="/"/>
+        {/* <Redirect to="/"/> */}
       </Switch>
     );
 
     if(this.props.isAuthenticated){
       routes = (
         <Switch>
-          <Route path='/aesthete' component={Profile}/>
           <Route path="/logout" component={Logout} />
+          <Route path='/aesthete' component={Profile}/>
           <Route path="/" exact component={Home}/>
           <Redirect to="/" />
         </Switch>

@@ -8,6 +8,13 @@
     box-sizing: border-box;
 }
 
+.Auth h1 {
+    font-size: 34px;
+    color: #919090;
+    font-weight: lighter;
+    text-transform: capitalize;
+}
+
 @media (min-width: 600px) {
     .Auth {
         width: 500px;
