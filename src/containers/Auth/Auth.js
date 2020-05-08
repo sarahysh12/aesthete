@@ -6,6 +6,7 @@ import Button from '../../components/UI/Button/Button';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/utility.js';
+import Logo from '../../components/Logo/Logo';
 
 class Auth extends Component {
     state = {
@@ -39,7 +40,7 @@ class Auth extends Component {
                 touched: false
             }
         },
-        isSignup: true
+        isSignup: false
     }
 
     componentDidMount() {
@@ -64,6 +65,7 @@ class Auth extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
+        this.props.closeAuthentication();
     };
 
     switchAuthModeHandler = () => {
@@ -113,12 +115,14 @@ class Auth extends Component {
 
         return (
             <div className={classes.Auth}>
-                <h1>Welcome to Aesthete</h1>
+                <Logo/>
+                <h1>Login to connect & share</h1>
                 {authRedirect}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                     {form}
-                    <Button>SUBMIT</Button>
+                    <div className={classes.ForgetPass}><p>Forget your password?</p></div>
+                    <Button btnType='Default' btnSize='Large'>Log in</Button>
                 </form>
                 <button style={{border: 'none', outline: 'none', marginTop: '20px'}} onClick={this.switchAuthModeHandler}>
                 SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</button>

@@ -13,8 +13,7 @@ import Backdrop from '../../../components/UI/Backdrop/Backdrop';
 class Artworks extends Component {
 
     state = {
-        modalIsOpen: false,
-        showBlock: false
+        modalIsOpen: false
     }
 
     componentDidMount() {

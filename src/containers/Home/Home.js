@@ -5,8 +5,12 @@ import asethetePic from '../../assets/images/aesthete.jpg';
 import artistsPic from '../../assets/images/artists.jpg';
 import connectPic from '../../assets/images/connect.jpg';
 import Button from '../../components/UI/Button/Button';
+import Modal from '../../components/UI/Modal/Modal';
+import Backdrop from '../../components/UI/Backdrop/Backdrop';
+import Auth from '../Auth/Auth';
 
 class Home extends Component {
+   
 
     render() {
         return (
@@ -61,6 +65,7 @@ class Home extends Component {
                         </div>
 
                     </div>
+                    
                 </Layout>
                 
             </div>
