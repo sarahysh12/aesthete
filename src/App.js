@@ -40,9 +40,9 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-          <Layout>
+          {/* <Layout> */}
             {routes}
-          </Layout>
+          {/* </Layout> */}
         </div>
 
     );
