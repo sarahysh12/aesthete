@@ -2,7 +2,8 @@
   width: 100%;
   /* width: 97%; */
   height: 800px;
-  background-color: whitesmoke;
+  /* background-color: whitesmoke; */
+  background-color: #f0f0f0;
   margin: auto;
   margin-top: 20px;
   border-radius: 10px;
@@ -26,7 +27,6 @@
 
 .Image {
   flex: 60%;
-  background-color: violet;
 }
 
 .Image img {
@@ -48,14 +48,14 @@
 }
 
 .PurpleText {
-  color: #551A8B;
+  color: #4955a9;
 }
 
 .DetailsContent {
-  margin-top: 100px;
-  height: 500px;
+  margin: 50px;
+  height: 300px;
   display: flex;
-  background-color: thistle;
+  /* background-color: #f0f0f0; */
 }
 
 .DetailsImage {
@@ -63,18 +63,56 @@
 }
 
 .DetailsImage img{
-  /* width: 80%;
-  height: 60%; */
   border-radius: 50px;
-  width: 100%;
+  width:70%;
   height: 100%;
 }
 
 .DetailsDescription {
+  margin-top: 20px;
   flex: 60%;
-
-  /* border-radius: 50px; */
-  background-color: darkkhaki;
-  margin: auto;
-  width: 50%;
 }
+
+.DetailsDescription h3 {
+  text-align: left;
+  font-size: 20px;
+  color: #4955a9;
+}
+
+.GoalTiles{
+  margin:auto;
+  background-color: white;
+  width: 300px;
+  padding: 30px;
+  border-radius: 20px;
+  font-size: 16px;
+  color: gray;
+  line-height: 1.6em;
+  text-align: left;
+  height: 220px;
+}
+
+.WideImage {
+  background-color: white;
+  height: 500px;
+  display: flex;
+
+}
+
+.WideImage img{
+  width: 50%;
+  height: 100%;
+  margin: auto;
+}
+
+/* 
+
+#d2d1fb
+#f0f0f0
+#4955a9 
+#4a4b8d
+
+#d4d4fb
+#6c7cbc
+#888bbd
+*/

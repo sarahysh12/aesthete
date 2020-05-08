@@ -3,6 +3,8 @@
     box-sizing: border-box;
     display: block;
     width: 100%;
+    outline: none;
+    color: gray;
 }
 
 .NavigationItem a {
@@ -13,10 +15,10 @@
     display: block;
 }
 
+/* .NavigationItem a.active */
 .NavigationItem a:hover,
-.NavigationItem a:active,
-.NavigationItem a.active {
-    color: #551A8B;
+.NavigationItem a:active {
+    color: #4955a9;
 }
 
 @media (min-width: 500px) {
@@ -26,12 +28,13 @@
         height: 100%;
         width: auto;
         align-items: center;
+        color: #919090;
     }
     
     .NavigationItem a {
         color: #919090;
         height: 100%;
-        padding: 16px 10px;
+        padding: 60px 20px;
         border-bottom: 4px solid transparent;
     }
     
@@ -39,7 +42,7 @@
     .NavigationItem a:active,
     .NavigationItem a.active {
         /* border-bottom: 4px solid #551A8B; */
-        color: #551A8B;
+        /* color: #4955a9; */
     }
 }
 
