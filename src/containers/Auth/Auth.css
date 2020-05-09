@@ -1,16 +1,27 @@
 .Auth {
-    margin: 20px auto;
+    margin: 0 20px;
     width: 80%;
     text-align: center;
-    padding: 10px;
+    padding: 0 10px;
     box-sizing: border-box;
-    background-color: white;
 }
 
 .Auth h1 {
     font-size: 24px;
     color: #36384e;
     font-weight: 500;
+}
+
+.Auth span {
+    border: 'none';
+    outline: 'none';
+    padding-top: 20px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.ErrorMessage {
+    color: #ffa8b9;
 }
 
 .ForgetPass {

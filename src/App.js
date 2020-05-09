@@ -40,13 +40,13 @@ class App extends Component {
 
     return (
         <div className={classes.App}>
-          {/* <Layout> */}
+          <Layout>
             {routes}
-          <div className={classes.AppFooter}>
-            <a href="http://www.freepik.com">Designed by pikisuperstar / Freepik</a>
-          </div>
+            <div className={classes.AppFooter}>
+              <a href="http://www.freepik.com">Designed by pikisuperstar / Freepik</a>
+            </div>
   
-          {/* </Layout> */}
+          </Layout>
         </div>
 
     );
