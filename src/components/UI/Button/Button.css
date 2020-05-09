@@ -1,12 +1,21 @@
 .Button {
     cursor: pointer;
 	background: white;
-	border-radius: 1000px;
-	padding: 8px 25px;
+	border-radius:15px;
 	display: inline-block;
 	text-align: center;
 	outline: none;
 	margin: 10px;
+}
+
+.Small{
+	padding: 10px 20px;
+	font-size: 16px;
+}
+
+.Large {
+	padding: 10px 30px;
+	font-size: 18px;
 }
 
 .Button:disabled {
@@ -21,6 +30,9 @@
 }
 
 .Default {
-    color: #919090;
-	border: 1px solid #919090;
+	/* color: #919090; */
+	/* border: 1px solid #919090; */
+	background-color: #4955a9;
+	border: 1px solid whitesmoke;
+	color: whitesmoke;
 } 

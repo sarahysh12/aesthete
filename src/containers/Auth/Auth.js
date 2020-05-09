@@ -6,6 +6,7 @@ import Button from '../../components/UI/Button/Button';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/utility.js';
+import Logo from '../../components/Logo/Logo';
 
 class Auth extends Component {
     state = {
@@ -39,7 +40,7 @@ class Auth extends Component {
                 touched: false
             }
         },
-        isSignup: true
+        isSignup: false
     }
 
     componentDidMount() {
@@ -64,6 +65,9 @@ class Auth extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
+        // if(!this.props.error) {
+        //     this.props.closeAuthentication();
+        // }
     };
 
     switchAuthModeHandler = () => {
@@ -94,14 +98,10 @@ class Auth extends Component {
             />
         ));
 
-        // if (this.props.loading) {
-        //     form = <Spinner />
-        // }
-
         let errorMessage = null;
         if(this.props.error){
             errorMessage = (
-                <p>{this.props.error.message}</p>
+                <p className={classes.ErrorMessage}>{this.props.error.message}</p>
             );
         }
 
@@ -110,19 +110,41 @@ class Auth extends Component {
             authRedirect = <Redirect to={this.props.authRedirectPath}/>
         }
 
+        let login = (
+            <div>  
+                <h1>Login to connect & share</h1>
+                <form onSubmit={this.submitHandler}>
+                    {form}
+                    <div className={classes.ForgetPass}><p>Forget your password?</p></div>
+                    <Button btnType='Default' btnSize='Large'>Log in</Button>
+                </form>
+                <span onClick={this.switchAuthModeHandler}> Not an Aesthete yet? Sign up Now </span>
+            </div>
+        );
+        let signup = (
+            <div>
+                <h1>Become an Aesthete</h1>
+                <form onSubmit={this.submitHandler}>
+                    {form}
+                    <Button btnType='Default' btnSize='Large'>Sign Up</Button>
+                </form>
+                <span onClick={this.switchAuthModeHandler}> Already an Aesthete? Log In </span>
+            </div>
+        );
+            
+        let authContent = login;
+        if(this.state.isSignup) {
+            authContent = signup;
+        } else {
+            authContent = login ;
+        }
 
         return (
             <div className={classes.Auth}>
-                <h1>Welcome to Aesthete</h1>
+                <Logo/>
                 {authRedirect}
                 {errorMessage}
-                <form onSubmit={this.submitHandler}>
-                    {form}
-                    <Button>SUBMIT</Button>
-                </form>
-                <button style={{border: 'none', outline: 'none', marginTop: '20px'}} onClick={this.switchAuthModeHandler}>
-                SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</button>
-               
+                {authContent}
             </div>
         );
     }

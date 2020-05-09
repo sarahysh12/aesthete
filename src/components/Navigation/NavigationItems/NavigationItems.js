@@ -1,15 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
 import classes from './NavigationItems.css';
 import NavigationItem from './NavigationItem/NavigationItem';
+import Button from '../../UI/Button/Button';
+import Auth from '../../../containers/Auth/Auth';
+import Modal from '../../UI/Modal/Modal';
+import Backdrop from '../../UI/Backdrop/Backdrop';
 
-const navigationItems = ( props ) => (
-    <ul className={classes.NavigationItems}>
-        <NavigationItem link="/" exact>Home</NavigationItem>
-        {props.isAuthenticated ? <NavigationItem link="/aesthete/artworks">Aesthete</NavigationItem> : null}
-        {!props.isAuthenticated
-            ? <NavigationItem link="/auth">Authenticate</NavigationItem>
-            : <NavigationItem link="/logout">Logout</NavigationItem>}
-    </ul>
-);
+class NavigationItems extends Component {
+    state = {
+        modalIsOpen: false
+    }
+    showModal = () => {
+        this.setState({modalIsOpen: true});
+    }
 
-export default navigationItems;
+    closeModal = () => {
+        this.setState({modalIsOpen: false});
+    }
+
+    render() {
+        let signup = <Auth closeAuthentication={this.closeModal} />;
+        return(
+            <div>
+                <ul className={classes.NavigationItems}>
+                <NavigationItem link="/" exact>Artworks</NavigationItem>
+                <NavigationItem link="/" exact>Aesthetes</NavigationItem>
+                {!this.props.isAuthenticated
+                    ? <Button btnType='Default' btnSize='Small' clicked={this.showModal}>Log In</Button>
+                    : <NavigationItem link="/logout"><Button btnType='Default' btnSize='Small'>Logout</Button></NavigationItem>}
+                </ul>
+
+                <Modal show={this.state.modalIsOpen} closed={this.closeModal}>
+                    {signup}
+                </Modal>
+                {this.state.modalIsOpen ? <Backdrop show/>: null} 
+            </div>
+        );
+    }
+}
+
+export default NavigationItems;

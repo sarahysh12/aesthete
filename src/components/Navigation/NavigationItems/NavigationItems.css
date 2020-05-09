@@ -1,4 +1,5 @@
 .NavigationItems {
+    margin-top: 20px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -6,7 +7,7 @@
     flex-flow: column;
     align-items: center;
     height: 100%;
-    background-color: #FFBB99;
+    /* background-color: #FFBB99; */
 }
 
 @media (min-width: 500px) {

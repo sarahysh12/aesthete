@@ -2,11 +2,10 @@
     position: fixed;
     z-index: 200;
     background-color: white;
-    padding: 10px;
+    padding: 20px;
     text-align: center;
-    top: 25%;
+    /* top: 25%; */
     left: 15%;
-    width: 70%;
     border-radius: 20px;
     transition: all 0.3s ease-out;
 }
@@ -53,7 +52,7 @@
 
 @media (min-width: 600px) {
     .Modal {
-        width: 800px;
-        left: calc(40% - 200px);
+        /* width: 800px; */
+        left: calc(45% - 200px);
     }
 }
