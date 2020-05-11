@@ -116,7 +116,7 @@ class Auth extends Component {
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <div className={classes.ForgetPass}><p>Forget your password?</p></div>
-                    <Button btnType='Default' btnSize='Large'>Log in</Button>
+                    <Button btnType='Primary' btnSize='Large'>Log in</Button>
                 </form>
                 <span onClick={this.switchAuthModeHandler}> Not an Aesthete yet? Sign up Now </span>
             </div>
@@ -126,7 +126,7 @@ class Auth extends Component {
                 <h1>Become an Aesthete</h1>
                 <form onSubmit={this.submitHandler}>
                     {form}
-                    <Button btnType='Default' btnSize='Large'>Sign Up</Button>
+                    <Button btnType='Primary' btnSize='Large'>Sign Up</Button>
                 </form>
                 <span onClick={this.switchAuthModeHandler}> Already an Aesthete? Log In </span>
             </div>

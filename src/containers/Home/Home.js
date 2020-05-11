@@ -6,9 +6,11 @@ import * as actions from '../../store/actions/index';
 import Artwork from '../../components/Artwork/Artwork';
 import classes from './Home.css';
 import cookingPic from '../../assets/images/cooking.jpg';
+import Button from '../../components/UI/Button/Button';
 
 // TODO add feature to artwork such as new, popular,etc
 // TODO add pagination
+// TODO search not working when I delete characters
 class Home extends Component {
 
     constructor(props) {
@@ -17,68 +19,32 @@ class Home extends Component {
         this.state = {
             aesthetes: [],
             filteredArtworks: props.arts,
-            filteredAesthetes: props.artists,
             isCraved: true,
             renderCount : 0,
-            searchKey: myKey
+            searchKey: myKey.slice(1)
         }
     }
 
     componentDidMount(){
         this.props.onFetchArtworks();
         this.props.onFetchArtists();
-        this.getSearchResult(this.state.searchKey)
+        // this.getSearchResult(this.state.searchKey); // not working maybe use props.loading
     }
 
     onSearchHandler = (evt) => {
         const keyword = evt.target.value;
-        var regex = new RegExp(keyword);
-        let artworkSearchResult = [];
-        this.props.arts.some(artwork => {
-            if(artwork.artwork_type.toLowerCase().match(regex)){
-                artworkSearchResult.push(artwork)
-            }
-        });
-        this.setState({filteredArtworks: artworkSearchResult})
-
-        let aestheteSearchResult = [];
-        this.props.artists.some(aesthete => {
-            for (let cat of aesthete.category){
-                if(cat.toLowerCase().match(regex)){
-                    if(aestheteSearchResult.find(item => item.aesthete_full_name === aesthete.aesthete_full_name)){
-                        continue
-                    } else {
-                        aestheteSearchResult.push(aesthete)
-                    }
-                }
-            }
-        });
-        this.setState({filteredAesthetes: aestheteSearchResult})
+        this.getSearchResult(keyword);
     }
 
     getSearchResult (keyword) {
         var regex = new RegExp(keyword);
         let artworkSearchResult = [];
         this.props.arts.some(artwork => {
-            if(artwork.artwork_type.toLowerCase().match(regex)){
+            if(artwork.artworkData.artwork_type.toLowerCase().match(regex)){
                 artworkSearchResult.push(artwork)
             }
         });
-        this.setState({filteredArtworks: artworkSearchResult})
-
-        let aestheteSearchResult = [];
-        this.props.artists.some(aesthete => {
-            for (let cat of aesthete.category){
-                if(cat.toLowerCase().match(regex)){
-                    if(aestheteSearchResult.find(item => item.aesthete_full_name === aesthete.aesthete_full_name)){
-                        continue
-                    } else {
-                        aestheteSearchResult.push(aesthete)
-                    }
-                }
-            }
-        });
-        this.setState({filteredAesthetes: aestheteSearchResult})
+        this.setState({filteredArtworks: artworkSearchResult});
     }
 
     onSearchHandler = (evt) => {
@@ -119,7 +85,10 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className={classes.Filters}>
-                    
+                    <Button btnType='Default' btnSize='Small'>Art Category</Button>
+                    <Button btnType='Default' btnSize='Small'>Dates</Button>
+                    <Button btnType='Default' btnSize='Small'>Price</Button>
+                    <Button btnType='Default' btnSize='Small'>Sort By</Button>
                 </div>
                 <section className={classes.Artworks}>
                     {arts}

@@ -29,10 +29,17 @@
 	border: 1px solid #FFBB99;
 }
 
-.Default {
-	/* color: #919090; */
-	/* border: 1px solid #919090; */
+.Primary {
 	background-color: #4955a9;
 	border: 1px solid whitesmoke;
 	color: whitesmoke;
+} 
+
+
+.Default {
+	background-color: white;
+	border: 1px solid white;
+	color: #919090;
+	font-weight: 300;
+	font-size: 15px;
 } 

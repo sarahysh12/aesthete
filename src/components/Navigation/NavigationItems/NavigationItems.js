@@ -26,8 +26,8 @@ class NavigationItems extends Component {
                 <NavigationItem link="/" exact>Artworks</NavigationItem>
                 <NavigationItem link="/" exact>Aesthetes</NavigationItem>
                 {!this.props.isAuthenticated
-                    ? <Button btnType='Default' btnSize='Small' clicked={this.showModal}>Log In</Button>
-                    : <NavigationItem link="/logout"><Button btnType='Default' btnSize='Small'>Logout</Button></NavigationItem>}
+                    ? <Button btnType='Primary' btnSize='Small' clicked={this.showModal}>Log In</Button>
+                    : <NavigationItem link="/logout"><Button btnType='Primary' btnSize='Small'>Logout</Button></NavigationItem>}
                 </ul>
 
                 <Modal show={this.state.modalIsOpen} closed={this.closeModal}>

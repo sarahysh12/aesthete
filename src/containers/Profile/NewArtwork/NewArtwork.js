@@ -139,7 +139,7 @@ class NewArtwork extends Component {
                     />
                 ))}
                 <Button btnType='Success' disabled={!this.state.formIsValid}>Add Artwork</Button>
-                <Button btnType='Default' clicked={this.props.newArtCancelled} >Cancel</Button>
+                <Button btnType='Primary' clicked={this.props.newArtCancelled} >Cancel</Button>
             </form>
         );
         return (
