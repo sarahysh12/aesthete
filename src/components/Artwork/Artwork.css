@@ -1,37 +1,59 @@
 .Artwork{
-    width: 300px;
-    border: 1px solid #eee;
-    padding: 20px;
-    box-shadow: 0 2px 3px #ccc;
-    /* box-sizing: border-box; ???? */
-    cursor: pointer;
-    text-align: center;
-    margin: 20px;
-}
-
-.Artwork button {
-	background:#ffffff;
-	border: 1px solid #919090;
-	border-radius: 1000px;
-	padding: 8px 25px;
-	color:#919090;
-	display: inline-block;
+	width: 300px;
+	padding: 10px;
 	text-align: center;
-	outline: none;
+	margin: 20px;
+	background-color: white;
+	border-radius: 10px;
+	/* height: 470px; */
+}
+.Artwork img {
+	width: 300px;
+	height: 200px;
+	border-radius: 10px;
 }
 
-.Artwork button:hover {
-	background-color:#FFBB99;
-	color: white;
-	border: 1px solid white;
+.Artwork span {
+	cursor: pointer;
+}
 
+.Artwork p {
+	display: block;
 }
-.Artwork button:active {
-	position:relative;
-	top:1px;
+
+.ColoredTitle p{
+	color: #4955a9;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-weight: 600;
+	width: 100%;
+	text-align: left;
 }
-.Artwork button:disabled {
-    background-color: gray;
-    color: #ccc;
+
+.Title {
+	color: #757373;
+	font-size: 13px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: left;
+	width: 100%;
 }
-       
+
+.Description{
+	color: #919090;
+	text-align: left;
+	font-size: 14px;
+	width: 100%;
+	text-align: justify;
+}
+
+.ColoredText {
+	color: #4955a9;
+	font-size: 12px;
+	font-style: italic;
+}
+
+.Icons {
+	text-align: left;
+	color: #919090;
+}

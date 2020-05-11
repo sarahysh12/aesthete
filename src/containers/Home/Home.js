@@ -1,94 +1,150 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Search from '../../components/Search/Search';
+import axios from '../../axios';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
+import Artwork from '../../components/Artwork/Artwork';
 import classes from './Home.css';
-import asethetePic from '../../assets/images/aesthete.jpg';
-import artistsPic from '../../assets/images/artists.jpg';
-import connectPic from '../../assets/images/connect.jpg';
-import Button from '../../components/UI/Button/Button';
-import Modal from '../../components/UI/Modal/Modal';
-import Backdrop from '../../components/UI/Backdrop/Backdrop';
-import Auth from '../Auth/Auth';
+import cookingPic from '../../assets/images/cooking.jpg';
 
+// TODO add feature to artwork such as new, popular,etc
+// TODO add pagination
 class Home extends Component {
-    state = {
-        modalIsOpen: false
-    }
-    showModal = () => {
-        this.setState({modalIsOpen: true});
+
+    constructor(props) {
+        super(props);
+        const { myKey } = this.props.match.params;
+        this.state = {
+            aesthetes: [],
+            filteredArtworks: props.arts,
+            filteredAesthetes: props.artists,
+            isCraved: true,
+            renderCount : 0,
+            searchKey: myKey
+        }
     }
 
-    closeModal = () => {
-        this.setState({modalIsOpen: false});
+    componentDidMount(){
+        this.props.onFetchArtworks();
+        this.props.onFetchArtists();
+        this.getSearchResult(this.state.searchKey)
     }
-    
+
+    onSearchHandler = (evt) => {
+        const keyword = evt.target.value;
+        var regex = new RegExp(keyword);
+        let artworkSearchResult = [];
+        this.props.arts.some(artwork => {
+            if(artwork.artwork_type.toLowerCase().match(regex)){
+                artworkSearchResult.push(artwork)
+            }
+        });
+        this.setState({filteredArtworks: artworkSearchResult})
+
+        let aestheteSearchResult = [];
+        this.props.artists.some(aesthete => {
+            for (let cat of aesthete.category){
+                if(cat.toLowerCase().match(regex)){
+                    if(aestheteSearchResult.find(item => item.aesthete_full_name === aesthete.aesthete_full_name)){
+                        continue
+                    } else {
+                        aestheteSearchResult.push(aesthete)
+                    }
+                }
+            }
+        });
+        this.setState({filteredAesthetes: aestheteSearchResult})
+    }
+
+    getSearchResult (keyword) {
+        var regex = new RegExp(keyword);
+        let artworkSearchResult = [];
+        this.props.arts.some(artwork => {
+            if(artwork.artwork_type.toLowerCase().match(regex)){
+                artworkSearchResult.push(artwork)
+            }
+        });
+        this.setState({filteredArtworks: artworkSearchResult})
+
+        let aestheteSearchResult = [];
+        this.props.artists.some(aesthete => {
+            for (let cat of aesthete.category){
+                if(cat.toLowerCase().match(regex)){
+                    if(aestheteSearchResult.find(item => item.aesthete_full_name === aesthete.aesthete_full_name)){
+                        continue
+                    } else {
+                        aestheteSearchResult.push(aesthete)
+                    }
+                }
+            }
+        });
+        this.setState({filteredAesthetes: aestheteSearchResult})
+    }
+
+    onSearchHandler = (evt) => {
+        const keyword = evt.target.value;
+        this.getSearchResult(keyword);
+    }
 
     render() {
-        let auth = <Auth closeAuthentication={this.closeModal} />;
+        let arts = null;
+        let artSource = this.props.arts;
+
+        if(this.state.filteredArtworks.length > 0) {
+            artSource = this.state.filteredArtworks;
+        }
+        else {
+            artSource = this.props.arts;
+        }
+        arts = artSource.map(art => {
+            return (
+                <Artwork 
+                    key = {art.id}
+                    title={art.artworkData.artwork_title}
+                    category={art.artworkData.artwork_type}
+                    price={art.artworkData.price}
+                    rating={art.rating}/>
+            );
+        });
+
+
         return (
             <div>
-                <div className={classes.Home}>
-                        <div className={classes.LandingTitleContent}>
-                            <div className={classes.Title}>
-                                <span>Connect <span className={classes.PurpleText} style={{fontSize: '60px'}}>&</span> Share</span> 
-                                <br/>
-                                <span>with other 
-                                    <span className={classes.PurpleText} style={{fontSize: '50px'}}> Artists!</span>
-                                </span>
-                                <p>Share your talent with the whole world and get others' back!</p>
-                                <Button btnType='Default' btnSize='Large'  clicked={this.showModal}>Become an Aesthete</Button>
-                            </div>
-                            <div className={classes.Image}>
-                                <img src={asethetePic} alt="aesthete pic"/>
-                            </div>
-                        </div>
-
-                        <div className={classes.DetailsContent}>
-                            <div className={classes.DetailsImage}>
-                                <img src={connectPic} alt="connect pic"/>
-                            </div>
-                            <div className={classes.DetailsDescription}>
-                                <p className={classes.GoalTiles}>
-                                    <h3>Stay Connected</h3>
-                                    Follow and connect with like-minded people and enjoy sharing your arts with each other, either you are a musician, make up artists, chef, interior designer and many more! </p>
-                            </div>
-                        </div>
-
-                        <div className={classes.WideImage}>
-                                <img src={artistsPic} alt="artists pic"/>
-                        </div>
-
-
-                        <div className={classes.DetailsContent}>
-                            <div className={classes.DetailsDescription}>
-                                <p className={classes.GoalTiles}>       
-                                    <h3>Consult with aesthetes</h3>
-                                    Ask other aesthetes' opinion about your projects when friends and family aren't available. From small daily routines like cooking, shopping clothes! To composing a song or decorating your living room by a designer!</p>
-                            </div>
-                            <div className={classes.DetailsDescription}>
-                                <p className={classes.GoalTiles}>
-                                    <h3>Share your ideas on your aesthete friends' arts</h3>
-                                    Help your aesthete network in their projects with your specialty! Share your ideas if you really rock at something! Give some tips & tricks how you dress up, or even share grandma's secret recepies!   </p>
-                            </div>
-                            <div className={classes.DetailsDescription}>
-                                <p className={classes.GoalTiles}>
-                                    <h3>Earn money at home!</h3>
-                                    Earn some money in your free time while you're at home! If you really enjoy something and never had a chance to try it in the real work, give it a shot online without any cost! Become and Aesthete and share your passion!</p>
-                            </div>
-
-                        </div>
-                        
+                <div className={classes.SearchDiv}>
+                    <div className={classes.SearchBar}>
+                        <Search keypressed={this.onSearchHandler}/>
+                    </div>
+                    <div className={classes.Image}>
+                        <img src={cookingPic}/>
+                    </div>
                 </div>
-
-                <Modal show={this.state.modalIsOpen} closed={this.closeModal}>
-                    {auth}
-                </Modal>
-                {this.state.modalIsOpen ? <Backdrop show/>: null} 
+                <div className={classes.Filters}>
+                    
+                </div>
+                <section className={classes.Artworks}>
+                    {arts}
+                </section>
             </div>
-        )
+        );
     }
 }
 
 
+const mapStateToProps = state => {
+    return {
+        arts: state.artwork.artworks,
+        artists: state.aesthete.aesthetes,
+        isAuthenticated: state.auth.token !== null
+    };
+};
 
 
-export default Home;
+const mapDispatchToProps = dispatch => {
+    return {
+        onFetchArtworks: () => dispatch(actions.fetchArtworks()),
+        onFetchArtists: () => dispatch(actions.fetchAesthetes()),
+        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
+    };
+};
 
+export default connect(mapStateToProps, mapDispatchToProps)(Home, axios);

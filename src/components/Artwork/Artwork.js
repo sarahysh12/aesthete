@@ -1,17 +1,30 @@
 import React from 'react';
 import classes from './Artwork.css';
+import pic from '../../assets/images/artwork.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoins } from '@fortawesome/fontawesome-free-solid';
+import Rating from '../UI/Rating/Rating';
 
-const artwork = (props) => (
-    <article className={classes.Artwork}>
-        <h3>{props.title}</h3>
-        <p>{props.description}</p>
-        <p>{props.category}</p>
-        <p>{props.rating} Star</p>
-        <p>{props.price} $/hr</p>
-        <p><b>{props.artist}</b></p>
-        <p>{Date(props.date)}</p>
-        <button onClick={props.craveClicked}>{props.isCraveSelected ? 'Crave' : 'Uncrave'}</button>
-    </article>
-);
+const artwork = (props) => {
+    // let subStringTitle = props.title.substring(0,35);
+    // if (props.title.length > 35) {
+    //     subStringTitle += '...';
+    // }
+    return (
+        <article className={classes.Artwork}>
+            <img src={pic}/>
+            <div className={classes.ColoredTitle}>
+                <p>{props.category}
+                <span style={{float: 'right'}}><Rating id={props.id} ratingValue={props.rating}/> </span>
+                </p>
+            </div>
+            <div className={classes.Title}><p>{props.title}</p></div>
+            <div className={classes.Icons}>
+                <FontAwesomeIcon icon={faCoins}/><span style={{fontSize: '12px', paddingLeft: '10px'}}>${props.price} / hr</span>
+            </div>
+        </article>  
+    );
+  
+};
 
 export default artwork;
