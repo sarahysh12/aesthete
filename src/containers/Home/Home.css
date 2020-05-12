@@ -44,10 +44,97 @@
   display: flex;
   justify-content: left;
   flex-flow: row wrap;  
-  /* margin: auto; */
   margin: 10px 30px;
 }
 
-.CategoryDropDoown {
-  
+
+/* DropDown Style */
+.CategoryDropDown {
+  position: relative;
+  display: inline-block;
+}
+
+.CategoryDropDownContent {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 300px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 10px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.CategoryDropDownContent .DropDownItem {
+  text-align: left;
+  color: #919090;
+  width: 200px;
+  padding: 15px 0px;
+  text-decoration: none;
+  display: block;
+}
+
+.CategoryDropDown:hover .CategoryDropDownContent {display: block;}
+
+
+/* Custom Checkbox Style */
+.Container {
+  display: block;
+  margin-left: 70px;
+  margin-top: 10px;
+  text-align: left;
+  margin-bottom: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.Container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.Checkmark {
+  position: absolute;
+  left: 20px;
+  height: 20px;
+  width: 20px;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+}
+
+.Container:hover input ~ .Checkmark {
+  background-color: #ccc;
+}
+
+.Container input:checked ~ .Checkmark {
+  background-color: #4955a9;
+}
+
+.Checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.Container input:checked ~ .Checkmark:after {
+  display: block;
+}
+
+.Container .Checkmark:after {
+  left: 7px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
