@@ -11,6 +11,7 @@ import Button from '../../components/UI/Button/Button';
 // TODO add feature to artwork such as new, popular,etc
 // TODO add pagination
 // TODO search not working when I delete characters
+// TODO why render 3 times?
 class Home extends Component {
 
     constructor(props) {
@@ -27,13 +28,8 @@ class Home extends Component {
 
     componentDidMount(){
         this.props.onFetchArtworks();
-        this.props.onFetchArtists();
+        this.props.onFetchArtCategories();
         // this.getSearchResult(this.state.searchKey); // not working maybe use props.loading
-    }
-
-    onSearchHandler = (evt) => {
-        const keyword = evt.target.value;
-        this.getSearchResult(keyword);
     }
 
     getSearchResult (keyword) {
@@ -50,6 +46,11 @@ class Home extends Component {
     onSearchHandler = (evt) => {
         const keyword = evt.target.value;
         this.getSearchResult(keyword);
+    }
+
+
+    onClickArtCategory = () => {
+        console.log(this.props.artCategories);
     }
 
     render() {
@@ -73,7 +74,7 @@ class Home extends Component {
             );
         });
 
-
+        
         return (
             <div>
                 <div className={classes.SearchDiv}>
@@ -81,11 +82,18 @@ class Home extends Component {
                         <Search keypressed={this.onSearchHandler}/>
                     </div>
                     <div className={classes.Image}>
-                        <img src={cookingPic}/>
+                        <img src={cookingPic} alt='cookingImg'/>
                     </div>
                 </div>
                 <div className={classes.Filters}>
-                    <Button btnType='Default' btnSize='Small'>Art Category</Button>
+                    <Button btnType='Default' btnSize='Small' clicked={this.onClickArtCategory}>Art Category</Button>
+                    <div className={classes.CategoryDropDoown}>
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+
+
                     <Button btnType='Default' btnSize='Small'>Dates</Button>
                     <Button btnType='Default' btnSize='Small'>Price</Button>
                     <Button btnType='Default' btnSize='Small'>Sort By</Button>
@@ -102,8 +110,9 @@ class Home extends Component {
 const mapStateToProps = state => {
     return {
         arts: state.artwork.artworks,
-        artists: state.aesthete.aesthetes,
-        isAuthenticated: state.auth.token !== null
+        isAuthenticated: state.auth.token !== null,
+        artCategories: state.cats.categories,
+        loading: state.cats.loading
     };
 };
 
@@ -111,8 +120,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onFetchArtworks: () => dispatch(actions.fetchArtworks()),
-        onFetchArtists: () => dispatch(actions.fetchAesthetes()),
-        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path))
+        onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path)),
+        onFetchArtCategories: () => dispatch(actions.fetchArtCategories())
     };
 };
 

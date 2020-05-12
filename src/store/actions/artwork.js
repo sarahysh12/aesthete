@@ -24,7 +24,7 @@ export const fetchArtworkFail = (error) => {
 
 export const fetchArtworks = () => {
     return dispatch => {
-        dispatch(fetchArtworkStart())
+        dispatch(fetchArtworkStart());
         axios.get('/artworks.json')
             .then(response => {
                 const fetchedArtworks = [];

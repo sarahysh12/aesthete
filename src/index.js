@@ -9,6 +9,7 @@ import { createStore, combineReducers, compose, applyMiddleware} from 'redux';
 import authReducer from './store/reducers/auth';
 import artworkReducer from './store/reducers/artwork';
 import aestheteReducer from './store/reducers/aesthete';
+import artCategoryReducer from './store/reducers/artCategory';
 import thunk from 'redux-thunk';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -16,7 +17,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
     auth: authReducer,
     artwork: artworkReducer,
-    aesthete: aestheteReducer
+    aesthete: aestheteReducer,
+    cats: artCategoryReducer
 })
 
 const store = createStore(rootReducer, composeEnhancers(

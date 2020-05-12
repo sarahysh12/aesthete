@@ -12,7 +12,7 @@ const artwork = (props) => {
     // }
     return (
         <article className={classes.Artwork}>
-            <img src={pic}/>
+            <img src={pic} alt='pic'/>
             <div className={classes.ColoredTitle}>
                 <p>{props.category}
                 <span style={{float: 'right'}}><Rating id={props.id} ratingValue={props.rating}/> </span>

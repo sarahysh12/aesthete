@@ -15,3 +15,7 @@ export {
     authCheckState,
     fetchUserData
 } from './auth';
+export {
+    fetchArtCategories
+}
+from './artCategory';

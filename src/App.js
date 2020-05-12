@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import * as actions from './store/actions/index';
 import Layout from './hoc/Layout/Layout';
 import Logout from './containers/Auth/Logout/Logout';
-import NewArtwork from './containers/Profile/NewArtwork/NewArtwork';
 import Home from './containers/Home/Home';
 
 class App extends Component {
