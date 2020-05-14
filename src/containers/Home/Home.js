@@ -4,15 +4,23 @@ import axios from '../../axios';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 import Artwork from '../../components/Artwork/Artwork';
-import classes from './Home.css';
+import classes from './Home.module.css';
 import cookingPic from '../../assets/images/cooking.jpg';
 import Button from '../../components/UI/Button/Button';
+
+import InputRange from 'react-input-range';
+import '../../../node_modules/react-rangeslider/lib/index.css'
+
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
+
 
 // TODO add feature to artwork such as new, popular,etc
 // TODO add pagination
 // TODO search not working when I delete characters
 // TODO why render 3 times?
-//TODO unselect all not working
+// TODO unselect all not working
+// TODO when you unselect the cheekbox it doesn't work
 class Home extends Component {
 
     constructor(props) {
@@ -24,9 +32,18 @@ class Home extends Component {
             isCraved: true,
             renderCount : 0,
             searchKey: myKey.slice(1),
-            selectedCategories: []
+            selectedCategories: [],
+            value: { min: 2, max: 10 },
+            startDate: new Date()
         }
     }
+
+
+        handleChange = date => {
+        this.setState({
+            startDate: date
+        });
+        };
 
     componentDidMount(){
         this.props.onFetchArtworks();
@@ -72,6 +89,8 @@ class Home extends Component {
         this.getSearchResultByCategories(updatedCategories);
     }
 
+ 
+
     render() {
         let arts = null;
         let artSource = this.props.arts;
@@ -106,7 +125,7 @@ class Home extends Component {
                 </div>
                 <div className={classes.Filters}>
                     <div className={classes.CategoryDropDown}>
-                        <Button btnType='Default' btnSize='Small'>Dates</Button>
+                        <Button btnType='Default' btnSize='Small'>Art Category</Button>
                         <div className={classes.CategoryDropDownContent}>
                             {/* <label className={classes.Container}>Unselect All
                                 <input type="checkbox" id='unselectAll'/>
@@ -122,8 +141,26 @@ class Home extends Component {
                             )}
                         </div>
                     </div>
-                    <Button btnType='Default' btnSize='Small'>Dates</Button>
-                    <Button btnType='Default' btnSize='Small'>Price</Button>
+
+                    <div className={classes.CategoryDropDown}>
+                        <Button btnType='Default' btnSize='Small'>Date</Button>
+                        <div className={classes.CategoryDropDownContent}>
+                            <DayPicker/>
+                        </div>
+                    </div>
+
+                    <div className={classes.CategoryDropDown}>
+                        <Button btnType='Default' btnSize='Small'>Price</Button>
+                        <div className={classes.CategoryDropDownContent}>
+                            Slider
+                            <InputRange
+                                maxValue={20}
+                                minValue={0}
+                                value={this.state.value}
+                                onChange={value => this.setState({ value })} />
+                        </div>
+                    </div>
+                    
                     <Button btnType='Default' btnSize='Small'>Sort By</Button>
                 </div>
                 <section className={classes.Artworks}>

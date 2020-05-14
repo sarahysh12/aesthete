@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './Landing.css';
+import classes from './Landing.module.css';
 import asethetePic from '../../assets/images/aesthete.jpg';
 import artistsPic from '../../assets/images/artists.jpg';
 import connectPic from '../../assets/images/connect.jpg';

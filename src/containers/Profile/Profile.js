@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import classes from './Profile.css';
+import classes from './Profile.module.css';
 import * as actions from '../../store/actions/index';
 import { connect } from 'react-redux';
 import profilePic from '../../assets/images/pic.png';

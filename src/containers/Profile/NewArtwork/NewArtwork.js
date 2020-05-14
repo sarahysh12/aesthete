@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './NewArtwork.css';
+import classes from './NewArtwork.module.css';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../../shared/utility.js';
 import Button from '../../../components/UI/Button/Button';

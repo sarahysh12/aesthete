@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Search.css';
+import classes from './Search.module.css';
 
 const search = (prpos) => (
     <div className={classes.Search}>

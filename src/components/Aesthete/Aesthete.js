@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Aesthete.css';
+import classes from './Aesthete.module.css';
 
 const aesthete = (props) => (
     <article className={classes.Aesthete}>

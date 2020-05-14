@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Artwork.css';
+import classes from './Artwork.module.css';
 import pic from '../../assets/images/artwork.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoins } from '@fortawesome/fontawesome-free-solid';

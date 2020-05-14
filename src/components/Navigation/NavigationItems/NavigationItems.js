@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './NavigationItems.css';
+import classes from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 import Button from '../../UI/Button/Button';
 import Auth from '../../../containers/Auth/Auth';

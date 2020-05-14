@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './App.css';
+import classes from './App.module.css';
 import { Switch } from 'react-router-dom';
 import Landing from './containers/Landing/Landing';
 import { withRouter, Route, Redirect } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import classes from './Bio.css';
+import classes from './Bio.module.css';
 import axios from '../../../axios';
 import { connect } from 'react-redux';
 

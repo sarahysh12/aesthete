@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as actions from '../../store/actions/index';
-import classes from './Auth.css';
+import classes from './Auth.module.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import { Redirect } from 'react-router-dom';

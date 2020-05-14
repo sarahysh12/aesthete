@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './FullArtwork.css';
+import classes from './FullArtwork.module.css';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
 import pic from '../../../assets/images/artwork.jpg';
