@@ -8,7 +8,7 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 const toolbar = ( props ) => (
     <header className={[classes.Toolbar, classes[props.bgColor]].join(' ')}>
         <div className={classes.Logo}>
-            <Logo/>
+            <a href='/'><Logo/></a>
         </div>
         <nav>
             <NavigationItems isAuthenticated={props.isAuth} />

@@ -1,0 +1,32 @@
+.CategoryDropDown {
+    position: relative;
+    display: inline-block;
+}
+
+.CategoryDropDownContent {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.CategoryDropDownContent .DropDownItem {
+    text-align: left;
+    color: #919090;
+    width: 200px;
+    padding: 15px 0px;
+    text-decoration: none;
+    display: block;
+}
+
+.CategoryDropDownContent a:hover, a:visited, a:focus, a:active{
+    font-size: 15px;
+    color:  #4955a9;
+}
+
+.CategoryDropDown:hover .CategoryDropDownContent {display: block;}

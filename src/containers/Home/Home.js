@@ -8,23 +8,21 @@ import Button from '../../components/UI/Button/Button';
 import Search from '../../components/Search/Search';
 import Layout from '../../hoc/Layout/Layout';
 import CheckList from '../../components/UI/CheckList/CheckList';
+import RangeSlider from '../../components/UI/RangeSlider/RangeSlider';
+import DropDownButton from '../../components/UI/DropDownButton/DropDownButton';
 
 import DayPicker from 'react-day-picker';
-import InputRange from 'react-input-range';
 
 import potteryPic from '../../assets/images/pottery.jpg';
 import 'react-day-picker/lib/style.css';
 import classes from './Home.module.css';
 import 'react-input-range/lib/css/index.css';
 
-
-
-// TODO add feature to artwork such as new, popular,etc
 // TODO add pagination
 // TODO search not working when I delete characters
 // TODO why render 3 times?
-// TODO unselect all not working
-// TODO when you unselect the cheekbox it doesn't work
+// TODO unselect all not working and unselect the cheekbox it doesn't work
+
 class Home extends Component {
 
     constructor(props) {
@@ -44,9 +42,9 @@ class Home extends Component {
     }
 
     handleChange = date => {
-    this.setState({
-        startDate: date
-    });
+        this.setState({
+            startDate: date
+        });
     };
 
     componentDidMount(){
@@ -96,7 +94,6 @@ class Home extends Component {
     render() {
         let arts = null;
         let artSource = this.props.arts;
-
         if(this.state.filteredArtworks.length > 0) {
             artSource = this.state.filteredArtworks;
         }
@@ -113,7 +110,6 @@ class Home extends Component {
                     rating={art.rating}/>
             );
         });
-
         
         return (
             <Layout color='White'>
@@ -122,46 +118,24 @@ class Home extends Component {
                         <div className={classes.SearchBar}>
                             <Search keypressed={this.onSearchHandler}/>
                             <div className={classes.Filters}>
-                                <div className={classes.CategoryDropDown}>
-                                    <Button btnType='Default' btnSize='Small'>Art Category</Button>
-                                    <div className={classes.CategoryDropDownContent}>
-                                        <CheckList list={this.props.artCategories}/>
+                                <DropDownButton label='Art Categry'>
+                                    <CheckList list={this.props.artCategories}/>
+                                </DropDownButton>
+                                <DropDownButton label='Date'>
+                                    <DayPicker/>
+                                </DropDownButton>
+                                <DropDownButton label='Price'>
+                                    <div className={classes.PriceRangeSlider}>
+                                        <RangeSlider/>
                                     </div>
-                                </div>
-
-                                <div className={classes.CategoryDropDown}>
-                                    <Button btnType='Default' btnSize='Small'>Date</Button>
-                                    <div className={classes.CategoryDropDownContent}>
-                                        <DayPicker/>
-                                    </div>
-                                </div>
-
-                                <div className={classes.CategoryDropDown}>
-                                    <Button btnType='Default' btnSize='Small'>Price</Button>
-                                    <div className={classes.CategoryDropDownContent}>
-                                        <div className={classes.PriceRangeSlider}>
-                                            <InputRange
-                                                maxValue={500}
-                                                minValue={0}
-                                                value={this.state.value}
-                                                onChange={value => this.setState({ value })} />
+                                </DropDownButton>
+                                <DropDownButton label='Sort By'>
+                                    {this.state.sortBy.map((cat) => 
+                                        <div className={classes.List}>
+                                            <a>{cat}</a>
                                         </div>
-                                    </div>
-                                </div>
-
-                                <div className={classes.CategoryDropDown}>
-                                    <Button btnType='Default' btnSize='Small'>Sort By</Button>
-                                    <div className={classes.CategoryDropDownContent}>
-                                        {/* {this.state.sortBy.map((filter) => 
-                                                <a href='#'>{filter}</a>
-                                        )} */}
-                                         {this.props.artCategories.map((cat) => 
-                                            <div>
-                                                <a className={classes.Container}>{cat}</a>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
+                                    )}
+                                </DropDownButton>
                             </div>
                         </div>
                         <div className={classes.Image}>

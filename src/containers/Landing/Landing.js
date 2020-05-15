@@ -25,7 +25,6 @@ class Landing extends Component {
     onSearch = (event) => {
         if(event.key === 'Enter') {
             this.props.history.push(`/home:${event.target.value}`);
-            // this.props.history.push('/home');
         }
     }
     
@@ -88,15 +87,8 @@ class Landing extends Component {
                                 <h3>Earn money at home!</h3>
                                 Earn some money in your free time while you're at home! If you really enjoy something and never had a chance to try it in the real work, give it a shot online without any cost! Become and Aesthete and share your passion!</p>
                         </div>
-
                     </div>
-                        
                 </div>
-{/* 
-                <Modal show={this.state.modalIsOpen} closed={this.closeModal}>
-                    {auth}
-                </Modal>
-                {this.state.modalIsOpen ? <Backdrop show/>: null}  */}
             </Layout>
         )
     }
