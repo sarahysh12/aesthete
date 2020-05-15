@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/utility.js';
 import Logo from '../../components/Logo/Logo';
+import { withRouter } from 'react-router-dom';
 
 class Auth extends Component {
     state = {
@@ -65,6 +66,8 @@ class Auth extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
+        console.log(this.props);
+        // this.props.history.push('/home:')
         // if(!this.props.error) {
         //     this.props.closeAuthentication();
         // }
@@ -126,7 +129,7 @@ class Auth extends Component {
                 <h1>Become an Aesthete</h1>
                 <form onSubmit={this.submitHandler}>
                     {form}
-                    <Button btnType='Primary' btnSize='Large'>Sign Up</Button>
+                    <Button btnType='Primary' btnSize='Large'>Log Up</Button>
                 </form>
                 <span onClick={this.switchAuthModeHandler}> Already an Aesthete? Log In </span>
             </div>
@@ -162,8 +165,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) => {dispatch(actions.auth(email, password, isSignup))},
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/home:'))
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Auth));

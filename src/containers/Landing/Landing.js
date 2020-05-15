@@ -40,7 +40,7 @@ class Landing extends Component {
                             <Modal show={this.state.modalIsOpen} closed={this.closeModal}>
                                 {auth}
                             </Modal>
-                            {this.state.modalIsOpen ? <Backdrop show/>: null} 
+                            {this.state.modalIsOpen ? <Backdrop show clicked={this.closeModal}/>: null} 
 
                             <span>Connect <span className={classes.PurpleText} style={{fontSize: '60px'}}>&</span> Share</span> 
                             <br/>
