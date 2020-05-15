@@ -7,7 +7,6 @@ import Profile from './containers/Profile/Profile';
 import Auth from './containers/Auth/Auth';
 import { connect } from 'react-redux';
 import * as actions from './store/actions/index';
-import Layout from './hoc/Layout/Layout';
 import Logout from './containers/Auth/Logout/Logout';
 import Home from './containers/Home/Home';
 
@@ -42,13 +41,10 @@ class App extends Component {
 
     return (
         <div className={classes.App}>
-          <Layout>
             {routes}
             <div className={classes.AppFooter}>
               <a href="http://www.freepik.com">Designed by pikisuperstar / Freepik</a>
             </div>
-  
-          </Layout>
         </div>
 
     );

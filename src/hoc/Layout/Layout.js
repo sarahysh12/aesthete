@@ -19,8 +19,7 @@ class Layout extends Component {
     render() {
         return (
             <Aux>
-                <Toolbar
-                    isAuth={this.props.isAuthenticated} />
+                <Toolbar bgColor={this.props.color} isAuth={this.props.isAuthenticated} />
                     {/* // drawerToggleClicked={this.sideDrawerToggleHandler} /> */}
                     <main className={classes.Content}>
                         {this.props.children}

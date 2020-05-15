@@ -1,9 +1,8 @@
-
 .Home {
     padding-top: 60px;
     color: #4d4a49;
+    background-color: white;
 }
-
 
 .Home hr {
   border: 0;
@@ -18,36 +17,39 @@
 
 .SearchDiv {
     height: 250px;
-    background-color: #fdf2ee;
+    background-color: white;
     display: flex;
 }
+
 .Image{
-  flex: 30%;
+  margin-right: 150px;
+  flex: 40%;
 }
+
 .SearchDiv img {
-  height: 250px;
-  width: 350px;
+  height: 300px;
+  width: 400px;
 }
 
 .SearchBar {
-  padding: 100px 0;
+  padding: 50px 0;
   flex: 70%;
 }
 
 .Artworks {
   display: flex;
   justify-content: left;
-  flex-flow: row wrap;  
-  margin: auto;
+  flex-flow: row wrap; 
+  margin-top: 8px;
+  margin-left: 50px;
 }
 
 .Filters{
   display: flex;
   justify-content: left;
   flex-flow: row wrap;  
-  margin: 10px 30px;
+  margin: 90px 80px;
 }
-
 
 /* DropDown Style */
 .CategoryDropDown {
@@ -76,6 +78,13 @@
   display: block;
 }
 
+
+.CategoryDropDownContent a:hover, a:visited, a:focus, a:active{
+  font-size: 15px;
+  color:  #4955a9;
+}
+
+
 .CategoryDropDown:hover .CategoryDropDownContent {display: block;}
 
 
@@ -93,56 +102,14 @@
   user-select: none;
 }
 
-.Container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
+.Container:hover {
+  font-size: 15px;
 }
 
-.Checkmark {
-  position: absolute;
-  left: 20px;
-  height: 20px;
-  width: 20px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-}
-
-.Container:hover input ~ .Checkmark {
-  background-color: #ccc;
-}
-
-.Container input:checked ~ .Checkmark {
-  background-color: #4955a9;
-}
-
-.Checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-.Container input:checked ~ .Checkmark:after {
-  display: block;
-}
-
-.Container .Checkmark:after {
-  left: 7px;
-  top: 2px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
 
 .PriceRangeSlider {
-  padding-top: 20px;
-  width: 100%;
+  padding: 40px 20px;
+  width: 85%;
 }
 
 
@@ -178,4 +145,24 @@
   border-radius: 50%;
   background: #4CAF50;
   cursor: pointer;
+}
+
+
+.DropDownList {
+  display: block;
+  margin-left: 70px;
+  margin-top: 10px;
+  text-align: left;
+  margin-bottom: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+
+.DropDownList:hover {
+  background-color: whitesmoke;
 }

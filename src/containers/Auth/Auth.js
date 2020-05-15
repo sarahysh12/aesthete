@@ -40,7 +40,7 @@ class Auth extends Component {
                 touched: false
             }
         },
-        isSignup: false
+        isSignup: this.props.authType === 'signup'
     }
 
     componentDidMount() {

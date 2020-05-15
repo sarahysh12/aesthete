@@ -19,7 +19,7 @@ class NavigationItems extends Component {
     }
 
     render() {
-        let signup = <Auth closeAuthentication={this.closeModal} />;
+        let signup = <Auth closeAuthentication={this.closeModal} authType='login'/>;
         return(
             <div>
                 <ul className={classes.NavigationItems}>

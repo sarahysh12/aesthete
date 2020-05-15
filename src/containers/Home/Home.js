@@ -1,18 +1,22 @@
 import React, { Component } from "react";
-import Search from '../../components/Search/Search';
 import axios from '../../axios';
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
-import Artwork from '../../components/Artwork/Artwork';
-import classes from './Home.module.css';
-import cookingPic from '../../assets/images/cooking.jpg';
-import Button from '../../components/UI/Button/Button';
 
-import InputRange from 'react-input-range';
-import '../../../node_modules/react-rangeslider/lib/index.css'
+import Artwork from '../../components/Artwork/Artwork';
+import Button from '../../components/UI/Button/Button';
+import Search from '../../components/Search/Search';
+import Layout from '../../hoc/Layout/Layout';
+import CheckList from '../../components/UI/CheckList/CheckList';
 
 import DayPicker from 'react-day-picker';
+import InputRange from 'react-input-range';
+
+import potteryPic from '../../assets/images/pottery.jpg';
 import 'react-day-picker/lib/style.css';
+import classes from './Home.module.css';
+import 'react-input-range/lib/css/index.css';
+
 
 
 // TODO add feature to artwork such as new, popular,etc
@@ -33,17 +37,17 @@ class Home extends Component {
             renderCount : 0,
             searchKey: myKey.slice(1),
             selectedCategories: [],
-            value: { min: 2, max: 10 },
-            startDate: new Date()
+            value: { min: 1, max: 250 },
+            startDate: new Date(),
+            sortBy : ['Newest', 'Most Popular','Price: High to Low', 'Price: Low to High','Category']
         }
     }
 
-
-        handleChange = date => {
-        this.setState({
-            startDate: date
-        });
-        };
+    handleChange = date => {
+    this.setState({
+        startDate: date
+    });
+    };
 
     componentDidMount(){
         this.props.onFetchArtworks();
@@ -89,8 +93,6 @@ class Home extends Component {
         this.getSearchResultByCategories(updatedCategories);
     }
 
- 
-
     render() {
         let arts = null;
         let artSource = this.props.arts;
@@ -114,63 +116,67 @@ class Home extends Component {
 
         
         return (
-            <div>
-                <div className={classes.SearchDiv}>
-                    <div className={classes.SearchBar}>
-                        <Search keypressed={this.onSearchHandler}/>
-                    </div>
-                    <div className={classes.Image}>
-                        <img src={cookingPic} alt='cookingImg'/>
-                    </div>
-                </div>
-                <div className={classes.Filters}>
-                    <div className={classes.CategoryDropDown}>
-                        <Button btnType='Default' btnSize='Small'>Art Category</Button>
-                        <div className={classes.CategoryDropDownContent}>
-                            {/* <label className={classes.Container}>Unselect All
-                                <input type="checkbox" id='unselectAll'/>
-                                <span className={classes.Checkmark}></span>
-                            </label> */}
-                            {this.props.artCategories.map((cat) => 
-                                <div>
-                                    <label className={classes.Container}>{cat}
-                                            <input type="checkbox" id={cat} onClick={this.onClickArtCategory}/>
-                                            <span className={classes.Checkmark}></span>
-                                    </label>
+            <Layout color='White'>
+                <div className={classes.Home}>
+                    <div className={classes.SearchDiv}>
+                        <div className={classes.SearchBar}>
+                            <Search keypressed={this.onSearchHandler}/>
+                            <div className={classes.Filters}>
+                                <div className={classes.CategoryDropDown}>
+                                    <Button btnType='Default' btnSize='Small'>Art Category</Button>
+                                    <div className={classes.CategoryDropDownContent}>
+                                        <CheckList list={this.props.artCategories}/>
+                                    </div>
                                 </div>
-                            )}
-                        </div>
-                    </div>
 
-                    <div className={classes.CategoryDropDown}>
-                        <Button btnType='Default' btnSize='Small'>Date</Button>
-                        <div className={classes.CategoryDropDownContent}>
-                            <DayPicker/>
-                        </div>
-                    </div>
+                                <div className={classes.CategoryDropDown}>
+                                    <Button btnType='Default' btnSize='Small'>Date</Button>
+                                    <div className={classes.CategoryDropDownContent}>
+                                        <DayPicker/>
+                                    </div>
+                                </div>
 
-                    <div className={classes.CategoryDropDown}>
-                        <Button btnType='Default' btnSize='Small'>Price</Button>
-                        <div className={classes.CategoryDropDownContent}>
-                            Slider
-                            <InputRange
-                                maxValue={20}
-                                minValue={0}
-                                value={this.state.value}
-                                onChange={value => this.setState({ value })} />
+                                <div className={classes.CategoryDropDown}>
+                                    <Button btnType='Default' btnSize='Small'>Price</Button>
+                                    <div className={classes.CategoryDropDownContent}>
+                                        <div className={classes.PriceRangeSlider}>
+                                            <InputRange
+                                                maxValue={500}
+                                                minValue={0}
+                                                value={this.state.value}
+                                                onChange={value => this.setState({ value })} />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className={classes.CategoryDropDown}>
+                                    <Button btnType='Default' btnSize='Small'>Sort By</Button>
+                                    <div className={classes.CategoryDropDownContent}>
+                                        {/* {this.state.sortBy.map((filter) => 
+                                                <a href='#'>{filter}</a>
+                                        )} */}
+                                         {this.props.artCategories.map((cat) => 
+                                            <div>
+                                                <a className={classes.Container}>{cat}</a>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={classes.Image}>
+                            <img src={potteryPic} alt='potteryImg'/>
                         </div>
                     </div>
-                    
-                    <Button btnType='Default' btnSize='Small'>Sort By</Button>
+               
+                    <section className={classes.Artworks}>
+                        {arts}
+                    </section>
                 </div>
-                <section className={classes.Artworks}>
-                    {arts}
-                </section>
-            </div>
+            </Layout>
         );
     }
 }
-
 
 const mapStateToProps = state => {
     return {
@@ -180,7 +186,6 @@ const mapStateToProps = state => {
         loading: state.cats.loading
     };
 };
-
 
 const mapDispatchToProps = dispatch => {
     return {
