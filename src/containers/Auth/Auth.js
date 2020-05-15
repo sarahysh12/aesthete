@@ -46,7 +46,7 @@ class Auth extends Component {
     }
 
     componentDidMount() {
-        if (this.props.authRedirectPath !== '/') {
+        if (this.props.authRedirectPath !== '/home:') {
             this.props.onSetAuthRedirectPath();
         }
     }
@@ -67,11 +67,6 @@ class Auth extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
-        console.log(this.props);
-        // this.props.history.push('/home:')
-        // if(!this.props.error) {
-        //     this.props.closeAuthentication();
-        // }
     };
 
     switchAuthModeHandler = () => {
@@ -104,7 +99,6 @@ class Auth extends Component {
 
         let errorMessage = null;
         if(this.props.error){
-            console.log(formatErrorMessage(this.props.error.message))
             errorMessage = (
                 <p className={classes.ErrorMessage}>{formatErrorMessage(this.props.error.message)}</p>
             );

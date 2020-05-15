@@ -48,8 +48,8 @@ class Landing extends Component {
                                 <span className={classes.PurpleText} style={{fontSize: '50px'}}> Artists!</span>
                             </span>
                             <p>Share your talent with the whole world and get others' back!</p>
-                            <Button btnType='Primary' btnSize='Large'  clicked={this.showModal}>Become an Aesthete</Button>
                             <Search keypressed={this.onSearch}/>
+                            <Button btnType='Primary' btnSize='Large'  clicked={this.showModal}>Become an Aesthete</Button>
                         </div>
                         <div className={classes.Image}>
                             <img src={asethetePic} alt="aesthete pic"/>
