@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/utility.js';
 import Logo from '../../components/Logo/Logo';
 import { withRouter } from 'react-router-dom';
+import { formatErrorMessage } from '../../shared/errorMessages';
 
 class Auth extends Component {
     state = {
@@ -103,8 +104,9 @@ class Auth extends Component {
 
         let errorMessage = null;
         if(this.props.error){
+            console.log(formatErrorMessage(this.props.error.message))
             errorMessage = (
-                <p className={classes.ErrorMessage}>{this.props.error.message}</p>
+                <p className={classes.ErrorMessage}>{formatErrorMessage(this.props.error.message)}</p>
             );
         }
 
@@ -129,7 +131,7 @@ class Auth extends Component {
                 <h1>Become an Aesthete</h1>
                 <form onSubmit={this.submitHandler}>
                     {form}
-                    <Button btnType='Primary' btnSize='Large'>Log Up</Button>
+                    <Button btnType='Primary' btnSize='Large'>Sign Up</Button>
                 </form>
                 <span onClick={this.switchAuthModeHandler}> Already an Aesthete? Log In </span>
             </div>
