@@ -21,6 +21,11 @@
 
 .Logo {
     padding-left: 50px;
+    text-decoration: none;
+}
+
+.Logo a{
+    text-decoration: none;
 }
 
 .White {

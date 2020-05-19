@@ -4,14 +4,12 @@ import { connect } from 'react-redux';
 import * as actions from '../../store/actions/index';
 
 import Artwork from '../../components/Artwork/Artwork';
-import Button from '../../components/UI/Button/Button';
 import Search from '../../components/Search/Search';
 import Layout from '../../hoc/Layout/Layout';
 import CheckList from '../../components/UI/CheckList/CheckList';
 import RangeSlider from '../../components/UI/RangeSlider/RangeSlider';
 import DropDownButton from '../../components/UI/DropDownButton/DropDownButton';
-
-import DayPicker from 'react-day-picker';
+import DatePicker from '../../components/UI/DatePicker/DatePicker';
 
 import potteryPic from '../../assets/images/pottery.jpg';
 import 'react-day-picker/lib/style.css';
@@ -19,9 +17,10 @@ import classes from './Home.module.css';
 import 'react-input-range/lib/css/index.css';
 
 // TODO add pagination
-// TODO search not working when I delete characters
 // TODO why render 3 times?
-// TODO unselect all not working and unselect the cheekbox it doesn't work
+// TODO add unselect all
+// TODO if there is no data display Spinner
+// TODO clear checklist
 
 class Home extends Component {
 
@@ -41,37 +40,33 @@ class Home extends Component {
         }
     }
 
+    componentDidMount(){
+        if(this.state.searchKey === '') {
+            this.props.onFetchArtworks();
+        } else {
+            this.props.onSearchArtworks(this.state.searchKey);
+        }
+        this.props.onFetchArtCategories();
+    }
+
+    onSearchHandler = (evt) => {
+        const keyword = evt.target.value;
+        if(keyword === '') {
+            this.props.onFetchArtworks();
+        } else {
+            this.props.onSearchArtworks(keyword);
+        }
+    }
+
     handleChange = date => {
         this.setState({
             startDate: date
         });
     };
 
-    componentDidMount(){
-        this.props.onFetchArtworks();
-        this.props.onFetchArtCategories();
-        // this.getSearchResult(this.state.searchKey); // not working maybe use props.loading
-    }
-
-    getSearchResult (keyword) {
-        var regex = new RegExp(keyword);
-        let artworkSearchResult = [];
-        this.props.arts.some(artwork => {
-            if(artwork.artworkData.artwork_type.toLowerCase().match(regex)){
-                artworkSearchResult.push(artwork)
-            }
-        });
-        this.setState({filteredArtworks: artworkSearchResult});
-    }
-
-    onSearchHandler = (evt) => {
-        const keyword = evt.target.value;
-        this.getSearchResult(keyword);
-    }
-
     getSearchResultByCategories = (updatedCategories) => {
         let artworkSearchResult = [];
-        for(let cat of updatedCategories){
+        for(let cat of updatedCategories) {
             var regex = new RegExp(cat);
             this.props.arts.some(artwork => {
                 if(artwork.artworkData.artwork_type.toLowerCase().match(regex)){
@@ -83,12 +78,32 @@ class Home extends Component {
     }
 
     onClickArtCategory = (event) => {
-        const updatedCategories = [
+        const isChecked = event.target.checked;
+        const inputValue = event.target.id;
+        let updatedCategories = [
             ...this.state.selectedCategories
         ];
-        updatedCategories.push(event.target.id);
-        this.setState({selectedCategories: updatedCategories});
+        if (isChecked){
+            updatedCategories.push(inputValue);
+        } else {
+            updatedCategories = updatedCategories.filter(item => item !== inputValue);
+        }
         this.getSearchResultByCategories(updatedCategories);
+        this.setState({selectedCategories: updatedCategories});
+    }
+
+    onRemoveTag = (cat) => {
+        let updatedCategories = [
+            ...this.state.selectedCategories
+        ];
+        updatedCategories = updatedCategories.filter(item => item !== cat);
+        this.getSearchResultByCategories(updatedCategories);
+        this.setState({selectedCategories: updatedCategories});
+        this.clearCheckList();
+    }
+
+    clearCheckList = () => {
+        // check or uncheck the items in checklist
     }
 
     render() {
@@ -116,13 +131,15 @@ class Home extends Component {
                 <div className={classes.Home}>
                     <div className={classes.SearchDiv}>
                         <div className={classes.SearchBar}>
-                            <Search keypressed={this.onSearchHandler}/>
+                            <Search changed={this.onSearchHandler}/>
                             <div className={classes.Filters}>
-                                <DropDownButton label='Art Categry'>
-                                    <CheckList list={this.props.artCategories}/>
+                                <DropDownButton label='Art Categry' isActive={this.state.selectedCategories.length > 0}>
+                                    <CheckList list={this.props.artCategories} clicked={this.onClickArtCategory}/>
                                 </DropDownButton>
                                 <DropDownButton label='Date'>
-                                    <DayPicker/>
+                                    <div className={classes.DatePicker}>
+                                        <DatePicker/>
+                                    </div>
                                 </DropDownButton>
                                 <DropDownButton label='Price'>
                                     <div className={classes.PriceRangeSlider}>
@@ -136,6 +153,11 @@ class Home extends Component {
                                         </div>
                                     )}
                                 </DropDownButton>
+                            </div>
+                            <div className={classes.FilterTags}>
+                                {this.state.selectedCategories.map((cat) => 
+                                        <button onClick={() => this.onRemoveTag(cat)}>{cat}</button>
+                                    )}
                             </div>
                         </div>
                         <div className={classes.Image}>
@@ -163,6 +185,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        onSearchArtworks: (category) => dispatch(actions.searchArtworks(category)),
         onFetchArtworks: () => dispatch(actions.fetchArtworks()),
         onSetAuthRedirectPath: (path) => dispatch(actions.setAuthRedirectPath(path)),
         onFetchArtCategories: () => dispatch(actions.fetchArtCategories())

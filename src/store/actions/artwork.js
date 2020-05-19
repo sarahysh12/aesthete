@@ -59,7 +59,7 @@ export const addArtworkSuccess = (id, artworkData) => {
 
 export const addArtworkFailed = (error) => {
     return {
-        type: actionTypes.ADD_ARTWORK_FAILED,
+        type: actionTypes.ADD_ARTWORK_FAIL,
         error: error
     }
 }
@@ -78,11 +78,10 @@ export const addArtwork = (artworkData, token) => {
     }
 }
 
-
 // Fetch Artworks by userId
 export const fetchArtworksByUserId = (token, userId) => {
     return dispatch => {
-        dispatch(fetchArtworkStart())
+        dispatch(fetchArtworkStart());
         const queryParams = '?orderBy="userId"&equalTo="'+userId+'"';
         axios.get('/artworks.json'+queryParams)
             .then(response => {
@@ -100,3 +99,46 @@ export const fetchArtworksByUserId = (token, userId) => {
             });
     }
 }
+
+// Search Artworks
+export const searchArtworkStart = () => {
+    return {
+        type: actionTypes.SEARCH_ARTWORK_START
+    }
+};
+
+export const searchArtworkSuccess = (artworks) => {
+    return {
+        type: actionTypes.SEARCH_ARTWORK_SUCCESS,
+        artworks: artworks
+    }
+};
+
+export const searchArtworkFail = (error) => {
+    return {
+        type: actionTypes.SEARCH_ARTWORK_FAIL,
+        error: error
+    }
+};
+
+export const searchArtworks = (categoty) => {
+    return dispatch => {
+        dispatch(searchArtworkStart());
+        const queryParams = '?orderBy="artworkData/artwork_type"&equalTo="'+categoty+'"';
+        axios.get('/artworks.json'+queryParams)
+            .then(response => {
+                console.log(response)
+                const fetchedArtworks = [];
+                for(let key in response.data) {
+                    fetchedArtworks.push({
+                        ...response.data[key],
+                        id: key
+                    });
+                }
+                dispatch(searchArtworkSuccess(fetchedArtworks))
+            })
+            .catch(error => {
+                dispatch(searchArtworkFail(error))
+        });
+    }
+} 

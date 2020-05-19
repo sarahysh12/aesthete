@@ -1,0 +1,32 @@
+.Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+    background-color: #f0f8ff !important;
+    color: #4a90e2;
+  }
+  .Selectable .DayPicker-Day {
+    border-radius: 0 !important;
+  }
+  .Selectable .DayPicker-Day--start {
+    border-top-left-radius: 50% !important;
+    border-bottom-left-radius: 50% !important;
+  }
+  .Selectable .DayPicker-Day--end {
+    border-top-right-radius: 50% !important;
+    border-bottom-right-radius: 50% !important;
+  }
+
+ .ResetBtn  button{
+    padding: 10px;
+    background-color: #b5c1fb;
+    color: whitesmoke;
+    margin: 0px 10px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-size: smaller;
+    outline: none;
+    border: none;
+    }
+    
+.ResetBtn button:hover {
+    background-color: #6484d1;
+}
