@@ -127,7 +127,6 @@ export const searchArtworks = (categoty) => {
         const queryParams = '?orderBy="artworkData/artwork_type"&equalTo="'+categoty+'"';
         axios.get('/artworks.json'+queryParams)
             .then(response => {
-                console.log(response)
                 const fetchedArtworks = [];
                 for(let key in response.data) {
                     fetchedArtworks.push({

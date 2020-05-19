@@ -21,6 +21,7 @@ import 'react-input-range/lib/css/index.css';
 // TODO add unselect all
 // TODO if there is no data display Spinner
 // TODO clear checklist
+// TODO url doesn't change by search and : is not correct format
 
 class Home extends Component {
 
@@ -131,7 +132,7 @@ class Home extends Component {
                 <div className={classes.Home}>
                     <div className={classes.SearchDiv}>
                         <div className={classes.SearchBar}>
-                            <Search changed={this.onSearchHandler}/>
+                            <Search keypressed={this.onSearchHandler} val={this.state.searchKey}/>
                             <div className={classes.Filters}>
                                 <DropDownButton label='Art Categry' isActive={this.state.selectedCategories.length > 0}>
                                     <CheckList list={this.props.artCategories} clicked={this.onClickArtCategory}/>
