@@ -73,7 +73,7 @@
 }
 
 
-.List a {
+.List label {
   display: block;
   margin-left: 70px;
   margin-top: 10px;
@@ -86,8 +86,8 @@
   user-select: none;
 }
 
-.List a:hover {
-  font-size: 15px;
+.List label:hover {
+  color: #4955a9;
 } 
 
 .PriceRangeSlider {

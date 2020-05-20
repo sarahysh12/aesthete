@@ -16,12 +16,15 @@ import 'react-day-picker/lib/style.css';
 import classes from './Home.module.css';
 import 'react-input-range/lib/css/index.css';
 
+import { convertTimestampToDate } from '../../shared/utility';
+
 // TODO add pagination
 // TODO why render 3 times?
 // TODO add unselect all
 // TODO if there is no data display Spinner
 // TODO clear checklist
 // TODO url doesn't change by search and : is not correct format
+// TODO sort doesn't work for last item of the list
 
 class Home extends Component {
 
@@ -37,7 +40,9 @@ class Home extends Component {
             selectedCategories: [],
             value: { min: 1, max: 250 },
             startDate: new Date(),
-            sortBy : ['Newest', 'Most Popular','Price: High to Low', 'Price: Low to High','Category']
+            sortBy : ['Newest', 'Most Popular','Price: High to Low', 'Price: Low to High'],
+            sortType : 'Sort By'
+
         }
     }
 
@@ -78,6 +83,14 @@ class Home extends Component {
         this.setState({filteredArtworks: artworkSearchResult});
     }
 
+    getSearchResultByDate = () => {
+        let sortedArtworks = this.props.arts.sort(function(a, b){
+            return b.created_date - a.created_date;
+        });
+        this.setState({filteredArtworks: sortedArtworks});
+    }
+
+
     onClickArtCategory = (event) => {
         const isChecked = event.target.checked;
         const inputValue = event.target.id;
@@ -107,6 +120,46 @@ class Home extends Component {
         // check or uncheck the items in checklist
     }
 
+    getSearchResultByPrice = (type) => {
+        let sortedArtworks = this.props.arts.sort(function(a, b){
+            if (type === 'asc') {
+                return a.artworkData.price  - b.artworkData.price;
+            } else {
+                return b.artworkData.price - a.artworkData.price;
+            }
+        });
+        this.setState({filteredArtworks: sortedArtworks});
+    }
+
+    getSearchResultByRating = () => {
+        let sortedArtworks = this.props.arts.sort(function(a, b){
+                return b.rating  - a.rating;
+        });
+        this.setState({filteredArtworks: sortedArtworks});
+    }
+
+
+    onSelectSortType = (event) => {
+        const sortBy = event.target.textContent;
+        console.log(sortBy);
+        switch (sortBy) {
+            case 'Newest':
+                this.getSearchResultByDate();
+                break;
+            case 'Price: High to Low':
+                this.getSearchResultByPrice('desc');
+                break;
+            case 'Price: Low to High':
+                this.getSearchResultByPrice('asc');
+                break;
+            case 'Most Popular':
+                this.getSearchResultByRating();
+            default:
+                this.setState({sortType:sortBy});
+        }
+    }
+
+
     render() {
         let arts = null;
         let artSource = this.props.arts;
@@ -121,6 +174,7 @@ class Home extends Component {
                 <Artwork 
                     key = {art.id}
                     title={art.artworkData.artwork_title}
+                    date={convertTimestampToDate(art.created_date)}
                     category={art.artworkData.artwork_type}
                     price={art.artworkData.price}
                     rating={art.rating}/>
@@ -147,18 +201,18 @@ class Home extends Component {
                                         <RangeSlider/>
                                     </div>
                                 </DropDownButton>
-                                <DropDownButton label='Sort By'>
+                                <DropDownButton label={this.state.sortType} isActive={this.state.sortType !== 'Sort By'}>
                                     {this.state.sortBy.map((cat) => 
                                         <div className={classes.List}>
-                                            <a>{cat}</a>
+                                            <label onClick={this.onSelectSortType}>{cat}</label>
                                         </div>
                                     )}
                                 </DropDownButton>
                             </div>
                             <div className={classes.FilterTags}>
                                 {this.state.selectedCategories.map((cat) => 
-                                        <button onClick={() => this.onRemoveTag(cat)}>{cat}</button>
-                                    )}
+                                    <button onClick={() => this.onRemoveTag(cat)}>{cat}</button>
+                                )}
                             </div>
                         </div>
                         <div className={classes.Image}>
