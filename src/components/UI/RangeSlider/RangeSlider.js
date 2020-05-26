@@ -2,12 +2,26 @@ import './RangeSlider.module.css';
 import React from 'react';
 import InputRange from 'react-input-range';
 
-const rangeSlider = (props) => (
-    <InputRange
-        maxValue={500}
-        minValue={0}
-        value={props.value} />
-        // onChange={value => this.setState({ value })} />
-);
+class RangeSlider extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { value: this.props.default };
+    }
 
-export default rangeSlider;
+    rangeSelected = (e) => {
+        this.props.selectRange(e)
+    }
+   
+    render() {
+      return (
+        <InputRange
+          maxValue={this.props.max}
+          minValue={this.props.min}
+          value={this.state.value}
+          onChange={value => this.setState({ value })}
+          onChangeComplete={ this.rangeSelected} />
+      );
+    }
+  }
+
+export default RangeSlider;

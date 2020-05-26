@@ -38,10 +38,11 @@ class Home extends Component {
             renderCount : 0,
             searchKey: myKey.slice(1),
             selectedCategories: [],
-            value: { min: 1, max: 250 },
+            rangeValue: { min: 1, max: 250 },
             startDate: new Date(),
             sortBy : ['Newest', 'Most Popular','Price: High to Low', 'Price: Low to High'],
-            sortType : 'Sort By'
+            sortType : 'Sort By',
+            priceRange: '20'
 
         }
     }
@@ -116,6 +117,7 @@ class Home extends Component {
         this.clearCheckList();
     }
 
+    
     clearCheckList = () => {
         // check or uncheck the items in checklist
     }
@@ -141,7 +143,6 @@ class Home extends Component {
 
     onSelectSortType = (event) => {
         const sortBy = event.target.textContent;
-        console.log(sortBy);
         switch (sortBy) {
             case 'Newest':
                 this.getSearchResultByDate();
@@ -157,6 +158,18 @@ class Home extends Component {
             default:
                 this.setState({sortType:sortBy});
         }
+    }
+
+    onSelectPriceRange = (val) => {
+        this.setState({priceRange: val}); 
+        let artworkSearchResult = [];
+        this.props.arts.some(artwork => {
+            if(artwork.artworkData.price <= this.state.priceRange){
+                artworkSearchResult.push(artwork)
+            }
+        });
+        this.setState({filteredArtworks: artworkSearchResult});
+
     }
 
 
@@ -198,7 +211,7 @@ class Home extends Component {
                                 </DropDownButton>
                                 <DropDownButton label='Price'>
                                     <div className={classes.PriceRangeSlider}>
-                                        <RangeSlider/>
+                                        <RangeSlider selectRange={this.onSelectPriceRange} max={this.state.rangeValue.max} min={this.state.rangeValue.min} default={this.state.rangeValue.max}/>
                                     </div>
                                 </DropDownButton>
                                 <DropDownButton label={this.state.sortType} isActive={this.state.sortType !== 'Sort By'}>
