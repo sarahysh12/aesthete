@@ -1,0 +1,100 @@
+.Home {
+    color: #4d4a49;
+    background-color: white;
+}
+
+.Home hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.Home h1 {
+  padding-top: 30px;
+  color: #635e5d;
+}
+
+.SearchDiv {
+    height: 300px;
+    background-color: white;
+    display: flex;
+}
+
+.SearchDiv img {
+  height: 300px;
+  width: 400px;
+}
+
+.SearchBar {
+  padding: 100px 0;
+  flex: 70%;
+}
+
+.Image{
+  margin-right: 150px;
+  flex: 40%;
+}
+
+.Artworks {
+  display: flex;
+  justify-content: left;
+  flex-flow: row wrap; 
+  margin-top: 20px;
+  margin-left: 50px;
+}
+
+.Filters{
+  display: flex;
+  justify-content: left;
+  flex-flow: row wrap;  
+  margin: 60px 80px 20px 80px;
+}
+
+.FilterTags {
+  margin-left: 80px;
+  float: left;
+}
+
+.FilterTags button {
+  padding: 10px;
+  background-color: #b5c1fb;
+  color: whitesmoke;
+  margin: 0px 10px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: smaller;
+  outline: none;
+  border: none;
+}
+
+.FilterTags button:hover {
+  background-color: #6484d1;
+}
+
+
+.List label {
+  display: block;
+  margin-left: 70px;
+  margin-top: 10px;
+  text-align: left;
+  margin-bottom: 20px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.List label:hover {
+  color: #4955a9;
+} 
+
+.PriceRangeSlider {
+  padding: 40px 20px;
+  width: 85%;
+}
+
+.DatePicker {
+  width: 600px;
+}

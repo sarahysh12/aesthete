@@ -1,0 +1,64 @@
+/* Custom Checkbox Style */
+.Container {
+    display: block;
+    margin-left: 70px;
+    margin-top: 10px;
+    text-align: left;
+    margin-bottom: 20px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .Container:hover {
+    font-size: 15px;
+  }
+  
+  .Container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  .Checkmark {
+    position: absolute;
+    left: 20px;
+    height: 20px;
+    width: 20px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  .Container:hover input ~ .Checkmark {
+    background-color: #ccc;
+  }
+  
+  .Container input:checked ~ .Checkmark {
+    background-color: #4955a9;
+  }
+  
+  .Checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  .Container input:checked ~ .Checkmark:after {
+    display: block;
+  }
+  
+  .Container .Checkmark:after {
+    left: 7px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }

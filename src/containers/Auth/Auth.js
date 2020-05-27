@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import * as actions from '../../store/actions/index';
-import classes from './Auth.css';
+import classes from './Auth.module.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { checkValidity } from '../../shared/utility.js';
 import Logo from '../../components/Logo/Logo';
+import { withRouter } from 'react-router-dom';
+import { formatErrorMessage } from '../../shared/errorMessages';
 
 class Auth extends Component {
     state = {
@@ -40,11 +42,11 @@ class Auth extends Component {
                 touched: false
             }
         },
-        isSignup: false
+        isSignup: this.props.authType === 'signup'
     }
 
     componentDidMount() {
-        if (this.props.authRedirectPath !== '/') {
+        if (this.props.authRedirectPath !== '/home:') {
             this.props.onSetAuthRedirectPath();
         }
     }
@@ -65,9 +67,6 @@ class Auth extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
-        // if(!this.props.error) {
-        //     this.props.closeAuthentication();
-        // }
     };
 
     switchAuthModeHandler = () => {
@@ -101,7 +100,7 @@ class Auth extends Component {
         let errorMessage = null;
         if(this.props.error){
             errorMessage = (
-                <p className={classes.ErrorMessage}>{this.props.error.message}</p>
+                <p className={classes.ErrorMessage}>{formatErrorMessage(this.props.error.message)}</p>
             );
         }
 
@@ -116,7 +115,7 @@ class Auth extends Component {
                 <form onSubmit={this.submitHandler}>
                     {form}
                     <div className={classes.ForgetPass}><p>Forget your password?</p></div>
-                    <Button btnType='Default' btnSize='Large'>Log in</Button>
+                    <Button btnType='Primary' btnSize='Large'>Log in</Button>
                 </form>
                 <span onClick={this.switchAuthModeHandler}> Not an Aesthete yet? Sign up Now </span>
             </div>
@@ -126,7 +125,7 @@ class Auth extends Component {
                 <h1>Become an Aesthete</h1>
                 <form onSubmit={this.submitHandler}>
                     {form}
-                    <Button btnType='Default' btnSize='Large'>Sign Up</Button>
+                    <Button btnType='Primary' btnSize='Large'>Sign Up</Button>
                 </form>
                 <span onClick={this.switchAuthModeHandler}> Already an Aesthete? Log In </span>
             </div>
@@ -162,8 +161,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onAuth: (email, password, isSignup) => {dispatch(actions.auth(email, password, isSignup))},
-        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
+        onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/home:'))
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Auth));

@@ -1,14 +1,19 @@
 .Home {
+  padding-top: 60px;
+  color: #4d4a49;
+}
+
+
+.Landing {
   width: 100%;
   /* width: 97%; */
   height: 800px;
   /* background-color: whitesmoke; */
   background-color: #f0f0f0;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 80px;
   border-radius: 10px;
   /* border: 2px solid whitesmoke; */
-
 }
 
 .LandingTitleContent {

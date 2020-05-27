@@ -1,6 +1,7 @@
 /* TODO add search icon to the text box with font awesome */
 .Search input[type=text] {
-    width: 30%;
+    width: 55%;
+    min-width: 450px;
     height: 50px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -10,8 +11,9 @@
     padding: 12px 20px 12px 40px;
     transition: width 0.4s ease-in-out; 
     outline: none;
+    border-radius: 20px;
   }
   
   .Search input[type=text]:focus {
-    width: 60%;
+    width: 80%;
   }

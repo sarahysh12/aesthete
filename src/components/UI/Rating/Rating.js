@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './Rating.css';
+import classes from './Rating.module.css';
 
 //TODO implement change handlere and disable (read only)
 const rating = (props) => (

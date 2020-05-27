@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classes from './NavigationItems.css';
+import classes from './NavigationItems.module.css';
 import NavigationItem from './NavigationItem/NavigationItem';
 import Button from '../../UI/Button/Button';
 import Auth from '../../../containers/Auth/Auth';
@@ -19,22 +19,21 @@ class NavigationItems extends Component {
     }
 
     render() {
-        let signup = <Auth closeAuthentication={this.closeModal} />;
+        let signup = <Auth closeAuthentication={this.closeModal} authType='login'/>;
         return(
-            <div>
+            <article>
                 <ul className={classes.NavigationItems}>
-                <NavigationItem link="/" exact>Artworks</NavigationItem>
-                <NavigationItem link="/" exact>Aesthetes</NavigationItem>
-                {!this.props.isAuthenticated
-                    ? <Button btnType='Default' btnSize='Small' clicked={this.showModal}>Log In</Button>
-                    : <NavigationItem link="/logout"><Button btnType='Default' btnSize='Small'>Logout</Button></NavigationItem>}
+                    <NavigationItem link="/" exact>Artworks</NavigationItem>
+                    <NavigationItem link="/" exact>Aesthetes</NavigationItem>
+                    {!this.props.isAuthenticated
+                        ? <NavigationItem link=""><Button btnType='Primary' btnSize='Small' clicked={this.showModal}>Log In</Button></NavigationItem>
+                        : <NavigationItem link="/logout"><Button btnType='Primary' btnSize='Small'>Logout</Button></NavigationItem>}
                 </ul>
-
                 <Modal show={this.state.modalIsOpen} closed={this.closeModal}>
                     {signup}
                 </Modal>
-                {this.state.modalIsOpen ? <Backdrop show/>: null} 
-            </div>
+                {this.state.modalIsOpen ? <Backdrop show clicked={this.closeModal}/>: null}
+            </article>
         );
     }
 }

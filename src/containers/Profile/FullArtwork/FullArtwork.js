@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import classes from './FullArtwork.css';
+import classes from './FullArtwork.module.css';
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions/index';
-import Artwork from '../Artworks/Artwork/Artwork';
 import pic from '../../../assets/images/artwork.jpg';
 
 //TOOD maybe we need getArtworkById in redux
@@ -29,7 +28,7 @@ class FullArtwork extends Component {
                             <p>{selectedArt[0].artworkData.artwork_description}</p>
                         </div>
                         <div className={classes.Image}>
-                            <img src={pic}/>
+                            <img src={pic} alt='pic'/>
                         </div>
                     </div>
                 );

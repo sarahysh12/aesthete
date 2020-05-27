@@ -1,7 +1,8 @@
 export {
     fetchArtworks,
     addArtwork,
-    fetchArtworksByUserId
+    fetchArtworksByUserId,
+    searchArtworks
 }
 from './artwork';
 export {
@@ -15,3 +16,7 @@ export {
     authCheckState,
     fetchUserData
 } from './auth';
+export {
+    fetchArtCategories
+}
+from './artCategory';

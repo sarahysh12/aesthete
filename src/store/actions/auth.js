@@ -125,7 +125,6 @@ export const fetchUserData = () => {
             dispatch(fetchUserDataSuccess(response.data.users[0].email))
         })
         .catch(error => {
-            console.log(error);
             dispatch(fetchUserDataFail(error.response.data.error));
         });
 

@@ -10,11 +10,12 @@
 
 .Small{
 	padding: 10px 20px;
-	font-size: 16px;
+	font-size: 17px;
 }
 
 .Large {
 	padding: 10px 30px;
+	margin: 20px 10px;
 	font-size: 18px;
 }
 
@@ -29,10 +30,23 @@
 	border: 1px solid #FFBB99;
 }
 
-.Default {
-	/* color: #919090; */
-	/* border: 1px solid #919090; */
+.Primary {
 	background-color: #4955a9;
 	border: 1px solid whitesmoke;
 	color: whitesmoke;
 } 
+
+
+.Default {
+	background-color: white;
+	border: 1px solid white;
+	box-shadow: 2px 2px 5px;
+	color: #919090;
+	font-weight: 300;
+	font-size: 15px;
+} 
+
+.Active {
+	border: 1px solid #4955a9;
+	color: #4955a9;
+}

@@ -1,7 +1,3 @@
-
-
-
-
 export const checkValidity = (value, rules) => {
     let isValid = true;
     if (!rules) {
@@ -31,4 +27,17 @@ export const checkValidity = (value, rules) => {
     }
 
     return isValid;
+}
+
+export const convertTimestampToDate = (timestamp) => {
+    const formatted_date = new Date(timestamp).toLocaleDateString("en-US");
+    return formatted_date;
+}
+
+export const convertDateToTimestamp = (date) => {
+    return Date.parse(date);
+}
+
+export const convertToISO = (date) => {
+    return date.toISOString().substring(0, 10);
 }

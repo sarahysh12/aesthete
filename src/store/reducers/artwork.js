@@ -38,24 +38,44 @@ const addArtworkSuccess = (state, action) => {
     })
 };
 
-const addArtworkFailed = (state, action) => {
+const addArtworkFail = (state, action) => {
+    return updateObject(state, {loading: false});
+};
+
+const searchArtworkStart = (state, action) => {
+    return updateObject(state, {loading: true});
+};
+
+const searchArtworkSuccess = (state, action) => {
+    return updateObject(state, {
+        artworks: action.artworks,
+        loading: false});
+};
+
+const searchArtworkFail = (state, action) => {
     return updateObject(state, {loading: false});
 };
 
 const reducer = (state=initialState, action) => {
     switch(action.type){
         case actionTypes.FETCH_ARTWORKS_START:
-            return fetchArtworksStart(state, action)
+            return fetchArtworksStart(state, action);
         case actionTypes.FETCH_ARTWORKS_SUCCESS:
-            return fetchArtworksSuccess(state, action)
+            return fetchArtworksSuccess(state, action);
         case actionTypes.FETCH_ARTWORKS_FAIL:
-            return fetchArtworksFail(state, action)
+            return fetchArtworksFail(state, action);
         case actionTypes.ADD_ARTWORK_START:
-            return addArtworkStart(state, action)
+            return addArtworkStart(state, action);
         case actionTypes.ADD_ARTWORK_SUCCESS:
-            return addArtworkSuccess(state, action)
-        case actionTypes.ADD_ARTWORK_FAILED:
-            return addArtworkFailed(state, action)
+            return addArtworkSuccess(state, action);
+        case actionTypes.ADD_ARTWORK_FAIL:
+            return addArtworkFail(state, action);
+        case actionTypes.SEARCH_ARTWORK_START:
+            return searchArtworkStart(state, action);
+        case actionTypes.SEARCH_ARTWORK_SUCCESS:
+            return searchArtworkSuccess(state, action);
+        case actionTypes.SEARCH_ARTWORK_FAIL:
+            return searchArtworkFail(state, action);
         default:
             return state
     }
