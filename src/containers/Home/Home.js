@@ -16,7 +16,7 @@ import 'react-day-picker/lib/style.css';
 import classes from './Home.module.css';
 import 'react-input-range/lib/css/index.css';
 
-import { convertTimestampToDate } from '../../shared/utility';
+import { convertTimestampToDate, convertDateToTimestamp, convertToISO } from '../../shared/utility';
 
 // TODO add pagination
 // TODO why render 3 times?
@@ -38,11 +38,11 @@ class Home extends Component {
             renderCount : 0,
             searchKey: myKey.slice(1),
             selectedCategories: [],
-            rangeValue: { min: 1, max: 250 },
-            startDate: new Date(),
+            priceRangeValue: { min: 1, max: 250 },
+            dateRangeValue: {start: null, end: null},
             sortBy : ['Newest', 'Most Popular','Price: High to Low', 'Price: Low to High'],
             sortType : 'Sort By',
-            priceRange: '20'
+            selectedPrice: 0
 
         }
     }
@@ -60,16 +60,11 @@ class Home extends Component {
         const keyword = evt.target.value;
         if(keyword === '') {
             this.props.onFetchArtworks();
-        } else {
+        } 
+        if(evt.key === 'Enter'){
             this.props.onSearchArtworks(keyword);
         }
     }
-
-    handleChange = date => {
-        this.setState({
-            startDate: date
-        });
-    };
 
     getSearchResultByCategories = (updatedCategories) => {
         let artworkSearchResult = [];
@@ -84,13 +79,16 @@ class Home extends Component {
         this.setState({filteredArtworks: artworkSearchResult});
     }
 
-    getSearchResultByDate = () => {
-        let sortedArtworks = this.props.arts.sort(function(a, b){
+    sortSearchResultByDate = () => {
+        let artSource = this.props.arts;
+        if (this.state.filteredArtworks.length > 0){
+            artSource = this.state.filteredArtworks;
+        }
+        let sortedArtworks = artSource.sort(function(a, b){
             return b.created_date - a.created_date;
         });
         this.setState({filteredArtworks: sortedArtworks});
     }
-
 
     onClickArtCategory = (event) => {
         const isChecked = event.target.checked;
@@ -114,16 +112,14 @@ class Home extends Component {
         updatedCategories = updatedCategories.filter(item => item !== cat);
         this.getSearchResultByCategories(updatedCategories);
         this.setState({selectedCategories: updatedCategories});
-        this.clearCheckList();
     }
-
     
-    clearCheckList = () => {
-        // check or uncheck the items in checklist
-    }
-
-    getSearchResultByPrice = (type) => {
-        let sortedArtworks = this.props.arts.sort(function(a, b){
+    sortSearchResultByPrice = (type) => {
+        let artSource = this.props.arts;
+        if (this.state.filteredArtworks.length > 0){
+            artSource = this.state.filteredArtworks;
+        }
+        let sortedArtworks = artSource.sort(function(a, b){
             if (type === 'asc') {
                 return a.artworkData.price  - b.artworkData.price;
             } else {
@@ -134,24 +130,23 @@ class Home extends Component {
     }
 
     getSearchResultByRating = () => {
-        let sortedArtworks = this.props.arts.sort(function(a, b){
+        let sortedArtworks = this.state.filteredArtworks.sort(function(a, b){
                 return b.rating  - a.rating;
         });
         this.setState({filteredArtworks: sortedArtworks});
     }
 
-
     onSelectSortType = (event) => {
         const sortBy = event.target.textContent;
         switch (sortBy) {
             case 'Newest':
-                this.getSearchResultByDate();
+                this.sortSearchResultByDate();
                 break;
             case 'Price: High to Low':
-                this.getSearchResultByPrice('desc');
+                this.sortSearchResultByPrice('desc');
                 break;
             case 'Price: Low to High':
-                this.getSearchResultByPrice('asc');
+                this.sortSearchResultByPrice('asc');
                 break;
             case 'Most Popular':
                 this.getSearchResultByRating();
@@ -161,10 +156,14 @@ class Home extends Component {
     }
 
     onSelectPriceRange = (val) => {
-        this.setState({priceRange: val}); 
+        let artSource = this.props.arts;
+        if (this.state.filteredArtworks.length > 0){
+            artSource = this.state.filteredArtworks;
+        }
+        this.setState({selectedPrice: val}); 
         let artworkSearchResult = [];
-        this.props.arts.some(artwork => {
-            if(artwork.artworkData.price <= this.state.priceRange){
+        artSource.some(artwork => {
+            if(artwork.artworkData.price <= this.state.selectedPrice){
                 artworkSearchResult.push(artwork)
             }
         });
@@ -172,6 +171,18 @@ class Home extends Component {
 
     }
 
+    onSelectDateRange = (range) => {
+        this.setState({dateRangeValue: {start: range.from, end: range.to}});
+        if (this.state.dateRangeValue.end !== null){
+            let artworkSearchResult = [];
+            this.state.filteredArtworks.find(artwork => {
+                if((artwork.created_date >= convertDateToTimestamp(range.from)) && (artwork.created_date <= convertDateToTimestamp(range.to))){
+                    artworkSearchResult.push(artwork);
+                }
+            });
+            this.setState({filteredArtworks: artworkSearchResult});
+        }
+    }
 
     render() {
         let arts = null;
@@ -204,14 +215,14 @@ class Home extends Component {
                                 <DropDownButton label='Art Categry' isActive={this.state.selectedCategories.length > 0}>
                                     <CheckList list={this.props.artCategories} clicked={this.onClickArtCategory}/>
                                 </DropDownButton>
-                                <DropDownButton label='Date'>
+                                <DropDownButton label={this.state.dateRangeValue.end ? convertToISO(this.state.dateRangeValue.start)+' to '+convertToISO(this.state.dateRangeValue.end): 'Date'} isActive={this.state.dateRangeValue.end !== null}>
                                     <div className={classes.DatePicker}>
-                                        <DatePicker/>
+                                        <DatePicker selectDateRange={this.onSelectDateRange}/>
                                     </div>
                                 </DropDownButton>
-                                <DropDownButton label='Price'>
+                                <DropDownButton label={this.state.selectedPrice === 0 ?'Price': '$1-'+this.state.selectedPrice} isActive={this.state.selectedPrice !== 0}>
                                     <div className={classes.PriceRangeSlider}>
-                                        <RangeSlider selectRange={this.onSelectPriceRange} max={this.state.rangeValue.max} min={this.state.rangeValue.min} default={this.state.rangeValue.max}/>
+                                        <RangeSlider selectRange={this.onSelectPriceRange} max={this.state.priceRangeValue.max} min={this.state.priceRangeValue.min} default={this.state.priceRangeValue.max}/>
                                     </div>
                                 </DropDownButton>
                                 <DropDownButton label={this.state.sortType} isActive={this.state.sortType !== 'Sort By'}>

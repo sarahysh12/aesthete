@@ -26,12 +26,12 @@ class DatePicker extends Component {
       handleDayClick(day) {
         const range = DateUtils.addDayToRange(day, this.state);
         this.setState(range);
+        this.props.selectDateRange(range);
       }
     
       handleResetClick() {
         this.setState(this.getInitialState());
       }
-
 
     render () {
         const { from, to } = this.state;

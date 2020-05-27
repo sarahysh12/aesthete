@@ -21,6 +21,7 @@ const artwork = (props) => {
             <div className={classes.Title}><p>{props.title}</p></div>
             <div className={classes.Icons}>
                 <FontAwesomeIcon icon={faCoins}/><span style={{fontSize: '12px', paddingLeft: '10px'}}>${props.price} / hr</span>
+                <p>{props.date}</p>
             </div>
         </article>  
     );
