@@ -43,7 +43,7 @@ class App extends Component {
         <div className={classes.App}>
             {routes}
             <div className={classes.AppFooter}>
-              <a href="http://www.freepik.com">Designed by pikisuperstar / Freepik</a>
+              {/* <a href="http://www.freepik.com">Designed by pikisuperstar / Freepik</a> */}
             </div>
         </div>
 

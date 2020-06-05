@@ -18,7 +18,8 @@ import 'react-input-range/lib/css/index.css';
 
 import { convertTimestampToDate, convertDateToTimestamp, convertToISO } from '../../shared/utility';
 
-// TODO add pagination
+import Pagination from '../../components/UI/Pagination/Pagination';
+
 // TODO why render 3 times?
 // TODO add unselect all
 // TODO if there is no data display Spinner
@@ -184,6 +185,10 @@ class Home extends Component {
         }
     }
 
+    callBackFuntion = (slicedData) => {
+        this.setState({filteredArtworks: slicedData});
+    }
+
     render() {
         let arts = null;
         let artSource = this.props.arts;
@@ -245,8 +250,9 @@ class Home extends Component {
                     </div>
                
                     <section className={classes.Artworks}>
-                        {arts}
+                    {arts}
                     </section>
+                    {artSource.length > 0 ? <Pagination data={this.props.arts} parentCallback={this.callBackFuntion}/>: null}
                 </div>
             </Layout>
         );
