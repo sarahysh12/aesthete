@@ -196,6 +196,10 @@ class Home extends Component {
     this.setState({ filteredArtworks: slicedData });
   };
 
+  onShowArtworkDetails = (artId) => {
+    this.props.history.push("/details/" + artId);
+  };
+
   render() {
     let arts = null;
     let artSource = this.props.arts;
@@ -213,6 +217,7 @@ class Home extends Component {
           category={art.artworkData.artwork_type}
           price={art.artworkData.price}
           rating={art.rating}
+          showDetailsClicked={() => this.onShowArtworkDetails(art.id)}
         />
       );
     });

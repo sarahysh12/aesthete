@@ -4,6 +4,7 @@ import { Switch } from "react-router-dom";
 import Landing from "./containers/Landing/Landing";
 import { withRouter, Route, Redirect } from "react-router-dom";
 import Aesthete from "./components/Aesthete/Aesthete";
+import ArtworkDetails from "./containers/ArtworkDetails/ArtworkDetails";
 import Auth from "./containers/Auth/Auth";
 import { connect } from "react-redux";
 import * as actions from "./store/actions/index";
@@ -30,7 +31,7 @@ class App extends Component {
           <Route path="/logout" component={Logout} />
           <Route path="/aesthete" component={Aesthete} />
           <Route path="/home:myKey" component={Home} />
-          {/* <Route path='/home' component={Home}/> */}
+          <Route path="/details/:artId" component={ArtworkDetails} />
           <Route path="/" exact component={Landing} />
           <Redirect to="/" />
         </Switch>
